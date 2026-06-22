@@ -1,0 +1,948 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #00ff88;
+    --green-dim: #00aa55;
+    --red: #ff2244;
+    --amber: #ffaa00;
+    --blue: #00aaff;
+    --cyan: #00ffee;
+    --panel: #0a0e14;
+    --panel2: #111620;
+    --panel3: #1a2030;
+    --border: #2a3a50;
+    --text: #c0d8f0;
+    --text-dim: #607080;
+  }
+
+  body {
+    background: var(--panel);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .cp-wrapper {
+    background: var(--panel);
+    min-height: 100vh;
+    padding: 12px;
+  }
+
+  .cp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    border-top: 2px solid var(--green);
+  }
+
+  .cp-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .cp-subtitle {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  .status-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 11px;
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  .status-dot.amber { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+  .status-dot.red { background: var(--red); box-shadow: 0 0 8px var(--red); animation: fastpulse 0.5s infinite; }
+
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes fastpulse { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    gap: 10px;
+  }
+
+  .panel-block {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    padding: 10px;
+  }
+
+  .panel-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+
+  /* Knob styles */
+  .knob-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .knob-canvas {
+    width: 64px; height: 64px;
+    cursor: grab;
+    display: block;
+  }
+
+  .knob-label {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .knob-value {
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 1px;
+  }
+
+  .knobs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* Meter bars */
+  .meter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .meter-name {
+    font-size: 9px;
+    color: var(--text-dim);
+    width: 60px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  .meter-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: var(--panel3);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .meter-bar-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+    position: relative;
+  }
+
+  .meter-bar-fill::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: rgba(255,255,255,0.8);
+  }
+
+  .meter-val {
+    font-size: 10px;
+    color: var(--text);
+    width: 38px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Core display */
+  .core-display {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .core-canvas-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 10px;
+  }
+
+  /* Switches */
+  .switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .switch-name {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .toggle {
+    width: 36px; height: 18px;
+    background: var(--panel3);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .toggle.on {
+    background: var(--green-dim);
+    border-color: var(--green);
+  }
+
+  .toggle.amber-on {
+    background: #885500;
+    border-color: var(--amber);
+  }
+
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    top: 2px; left: 2px;
+    transition: left 0.2s, background 0.2s;
+  }
+
+  .toggle.on::after { left: 20px; background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .toggle.amber-on::after { left: 20px; background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+
+  /* Gauges */
+  .gauge-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .gauge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .gauge-label { font-size: 8px; color: var(--text-dim); letter-spacing: 1px; text-align: center; }
+  .gauge-val { font-size: 11px; color: var(--cyan); }
+
+  /* Alarm panel */
+  .alarm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+
+  .alarm-btn {
+    padding: 5px 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    border: 1px solid;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    background: var(--panel3);
+    transition: all 0.2s;
+  }
+
+  .alarm-btn.normal { border-color: var(--border); color: var(--text-dim); }
+  .alarm-btn.active-g { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.08); box-shadow: 0 0 6px rgba(0,255,136,0.2); }
+  .alarm-btn.active-a { border-color: var(--amber); color: var(--amber); background: rgba(255,170,0,0.1); animation: pulse 1s infinite; }
+  .alarm-btn.active-r { border-color: var(--red); color: var(--red); background: rgba(255,34,68,0.1); animation: fastpulse 0.4s infinite; }
+
+  /* Digital readouts */
+  .readout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .readout-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+  }
+
+  .readout-title { font-size: 8px; color: var(--text-dim); letter-spacing: 1px; }
+
+  .readout-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green);
+    margin-top: 2px;
+    line-height: 1;
+  }
+
+  .readout-unit { font-size: 8px; color: var(--text-dim); }
+
+  /* SCRAM button */
+  .scram-btn {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    background: rgba(255,34,68,0.15);
+    border: 2px solid var(--red);
+    color: var(--red);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+
+  .scram-btn:hover { background: rgba(255,34,68,0.35); box-shadow: 0 0 20px rgba(255,34,68,0.5); }
+  .scram-btn:active { transform: scale(0.97); background: rgba(255,34,68,0.55); }
+
+  .scram-btn.scramming { background: rgba(255,34,68,0.6); box-shadow: 0 0 30px rgba(255,34,68,0.8); animation: fastpulse 0.3s infinite; }
+
+  /* Log feed */
+  .log-feed {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    height: 80px;
+    overflow-y: auto;
+    padding: 6px 8px;
+    font-size: 9px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-top: 8px;
+  }
+
+  .log-feed::-webkit-scrollbar { width: 4px; }
+  .log-feed::-webkit-scrollbar-thumb { background: var(--border); }
+
+  .log-line { color: var(--text-dim); }
+  .log-line.warn { color: var(--amber); }
+  .log-line.crit { color: var(--red); }
+  .log-line.ok { color: var(--green); }
+
+  /* Bottom row */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .ticker {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .ticker span { color: var(--cyan); }
+</style>
+
+<div class="cp-wrapper">
+  <div class="cp-header">
+    <div>
+      <div class="cp-title">⬡ UNIT 2 — REACTOR CONTROL SYSTEM</div>
+      <div class="cp-subtitle">WESTINGHOUSE AP1000 · REVISION 7.4.1 · AUTHORIZED ACCESS ONLY</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+      <div class="status-row"><div class="status-dot" id="main-status-dot"></div><span id="main-status-text" style="font-size:10px;color:var(--green);">NOMINAL OPERATION</span></div>
+      <div class="ticker">SYS TIME: <span id="clock">--:--:--</span> &nbsp; UPTIME: <span id="uptime">0d 0h 0m</span></div>
+    </div>
+  </div>
+
+  <div class="panel-block" style="margin-bottom: 10px; border-color: var(--cyan);">
+    <div class="panel-label">AI STERILE INTERFACE — LIVE FEED</div>
+    <div style="display: flex; justify-content: center; background: #000;">
+        <img id="videoFeed" src="http://localhost:5000/video_feed" style="width: 100%; max-width: 640px; border: 1px solid var(--cyan);">
+    </div>
+  </div>
+
+  <div class="main-grid">
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+      <div class="panel-block">
+        <div class="panel-label">Control Rod Position</div>
+        <div class="knobs-grid">
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-rod1" width="64" height="64"></canvas>
+            <div class="knob-label">ROD BANK A</div>
+            <div class="knob-value" id="kv-rod1">87%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-rod2" width="64" height="64"></canvas>
+            <div class="knob-label">ROD BANK B</div>
+            <div class="knob-value" id="kv-rod2">92%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-rod3" width="64" height="64"></canvas>
+            <div class="knob-label">ROD BANK C</div>
+            <div class="knob-value" id="kv-rod3">79%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-rod4" width="64" height="64"></canvas>
+            <div class="knob-label">ROD BANK D</div>
+            <div class="knob-value" id="kv-rod4">85%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-label">Coolant Flow Control</div>
+        <div class="knobs-grid">
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-flow1" width="64" height="64"></canvas>
+            <div class="knob-label">LOOP 1 FLOW</div>
+            <div class="knob-value" id="kv-flow1">73%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-flow2" width="64" height="64"></canvas>
+            <div class="knob-label">LOOP 2 FLOW</div>
+            <div class="knob-value" id="kv-flow2">71%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-pwr" width="64" height="64"></canvas>
+            <div class="knob-label">POWER SETPT</div>
+            <div class="knob-value" id="kv-pwr">95%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-borate" width="64" height="64"></canvas>
+            <div class="knob-label">BORATION</div>
+            <div class="knob-value" id="kv-borate">12%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-label">System Switches</div>
+        <div id="switch-list"></div>
+      </div>
+
+    </div>
+
+    <div class="core-display">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+        <div class="panel-block">
+          <div class="panel-label">Reactor Core Parameters</div>
+          <div class="readout-grid" id="readout-grid"></div>
+        </div>
+
+        <div class="panel-block">
+          <div class="panel-label">Alarm Status</div>
+          <div class="alarm-grid" id="alarm-grid"></div>
+        </div>
+
+      </div>
+
+      <div class="panel-block" style="flex:1;">
+        <div class="panel-label">Core Neutron Flux Map — Radial Cross Section</div>
+        <div class="core-canvas-wrap">
+          <canvas id="core-map" width="340" height="200"></canvas>
+        </div>
+        <div class="gauge-row" id="gauge-row"></div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-label">Primary Loop Thermal Hydraulics</div>
+        <div id="meter-list"></div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-label">Neutron Flux Trend (last 60s)</div>
+        <canvas id="trend-chart" width="540" height="70"></canvas>
+      </div>
+
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+      <div class="panel-block">
+        <div class="panel-label">Steam Generator</div>
+        <div class="knobs-grid">
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-sg1" width="64" height="64"></canvas>
+            <div class="knob-label">SG1 LEVEL</div>
+            <div class="knob-value" id="kv-sg1">68%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-sg2" width="64" height="64"></canvas>
+            <div class="knob-label">SG2 LEVEL</div>
+            <div class="knob-value" id="kv-sg2">71%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-stm" width="64" height="64"></canvas>
+            <div class="knob-label">STEAM FLOW</div>
+            <div class="knob-value" id="kv-stm">88%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-fw" width="64" height="64"></canvas>
+            <div class="knob-label">FW FLOW</div>
+            <div class="knob-value" id="kv-fw">86%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-label">Safety Systems</div>
+        <div class="knobs-grid">
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-eccs" width="64" height="64"></canvas>
+            <div class="knob-label">ECCS PRESS</div>
+            <div class="knob-value" id="kv-eccs">34%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-prz" width="64" height="64"></canvas>
+            <div class="knob-label">PRZR LEVEL</div>
+            <div class="knob-value" id="kv-prz">58%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-cont" width="64" height="64"></canvas>
+            <div class="knob-label">CONT PRESS</div>
+            <div class="knob-value" id="kv-cont">8%</div>
+          </div>
+          <div class="knob-group">
+            <canvas class="knob-canvas" id="k-rcp" width="64" height="64"></canvas>
+            <div class="knob-label">RCP SPEED</div>
+            <div class="knob-value" id="kv-rcp">100%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <div class="panel-label">Event Log</div>
+        <div class="log-feed" id="log-feed"></div>
+        <button class="scram-btn" id="scram-btn" onclick="triggerScram()">⚠ REACTOR SCRAM</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-grid">
+    <div class="panel-block">
+      <div class="panel-label">Electrical Output</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);margin-top:4px;" id="elec-out">1,157 <span style="font-size:11px;color:var(--text-dim);">MWe</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">GRID FREQ: <span style="color:var(--green)" id="freq">60.00 Hz</span></div>
+    </div>
+    <div class="panel-block">
+      <div class="panel-label">Core Thermal Power</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--amber);margin-top:4px;" id="therm-pwr">3,400 <span style="font-size:11px;color:var(--text-dim);">MWth</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">% RATED: <span style="color:var(--amber)" id="pct-rated">100.0%</span></div>
+    </div>
+    <div class="panel-block">
+      <div class="panel-label">Coolant Temperature</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--red);margin-top:4px;" id="coolant-temp">589 <span style="font-size:11px;color:var(--text-dim);">°F</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">Tcold: <span style="color:var(--blue)" id="tcold">545°F</span></div>
+    </div>
+    <div class="panel-block">
+      <div class="panel-label">Reactor Coolant Pressure</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--green);margin-top:4px;" id="rcs-press">2,235 <span style="font-size:11px;color:var(--text-dim);">psia</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">MARGIN: <span style="color:var(--green)" id="press-margin">+165 psi</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// ---- KNOB ENGINE ----
+const knobs = {};
+
+function drawKnob(id, value, color='#00ffee') {
+  const c = $(id);
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = 64, cx = 32, cy = 32, r = 26;
+  ctx.clearRect(0,0,W,W);
+
+  const startA = Math.PI * 0.75;
+  const endA = Math.PI * 2.25;
+  const valA = startA + (endA - startA) * value;
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, startA, endA);
+  ctx.strokeStyle = '#1a2030';
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Value arc
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, startA, valA);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 8;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Center fill
+  ctx.beginPath();
+  ctx.arc(cx, cy, 18, 0, Math.PI*2);
+  ctx.fillStyle = '#0d1520';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 18, 0, Math.PI*2);
+  ctx.strokeStyle = '#2a3a50';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Tick marks
+  for (let i=0; i<=10; i++) {
+    const a = startA + (endA-startA)*(i/10);
+    const inner = 19, outer = 23;
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(a)*inner, cy + Math.sin(a)*inner);
+    ctx.lineTo(cx + Math.cos(a)*outer, cy + Math.sin(a)*outer);
+    ctx.strokeStyle = i <= Math.round(value*10) ? color : '#2a3a50';
+    ctx.lineWidth = i%5===0 ? 2 : 1;
+    ctx.stroke();
+  }
+
+  // Indicator dot
+  ctx.beginPath();
+  ctx.arc(cx + Math.cos(valA)*22, cy + Math.sin(valA)*22, 3, 0, Math.PI*2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+}
+
+const knobDefs = [
+  {id:'k-rod1', val:0.87, color:'#00ff88', valId:'kv-rod1', suffix:'%', scale:100},
+  {id:'k-rod2', val:0.92, color:'#00ff88', valId:'kv-rod2', suffix:'%', scale:100},
+  {id:'k-rod3', val:0.79, color:'#00ff88', valId:'kv-rod3', suffix:'%', scale:100},
+  {id:'k-rod4', val:0.85, color:'#00ff88', valId:'kv-rod4', suffix:'%', scale:100},
+  {id:'k-flow1', val:0.73, color:'#00aaff', valId:'kv-flow1', suffix:'%', scale:100},
+  {id:'k-flow2', val:0.71, color:'#00aaff', valId:'kv-flow2', suffix:'%', scale:100},
+  {id:'k-pwr', val:0.95, color:'#ffaa00', valId:'kv-pwr', suffix:'%', scale:100},
+  {id:'k-borate', val:0.12, color:'#00ffee', valId:'kv-borate', suffix:'%', scale:100},
+  {id:'k-sg1', val:0.68, color:'#00aaff', valId:'kv-sg1', suffix:'%', scale:100},
+  {id:'k-sg2', val:0.71, color:'#00aaff', valId:'kv-sg2', suffix:'%', scale:100},
+  {id:'k-stm', val:0.88, color:'#ff7744', valId:'kv-stm', suffix:'%', scale:100},
+  {id:'k-fw', val:0.86, color:'#00aaff', valId:'kv-fw', suffix:'%', scale:100},
+  {id:'k-eccs', val:0.34, color:'#ff2244', valId:'kv-eccs', suffix:'%', scale:100},
+  {id:'k-prz', val:0.58, color:'#ffaa00', valId:'kv-prz', suffix:'%', scale:100},
+  {id:'k-cont', val:0.08, color:'#00ff88', valId:'kv-cont', suffix:'%', scale:100},
+  {id:'k-rcp', val:1.0, color:'#00ffee', valId:'kv-rcp', suffix:'%', scale:100},
+];
+
+knobDefs.forEach(k => {
+  knobs[k.id] = {...k};
+  drawKnob(k.id, k.val, k.color);
+});
+
+// Drag to turn knobs (Mouse and Wheel)
+document.querySelectorAll('.knob-canvas').forEach(canvas => {
+    // Wheel Listener for AI Hand Rotation Scroll
+    canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const id = canvas.id;
+        const k = knobs[id];
+        const delta = e.deltaY > 0 ? 0.05 : -0.05; 
+        const newVal = Math.min(1, Math.max(0, k.val + delta));
+        k.val = newVal;
+        drawKnob(id, newVal, k.color);
+        document.getElementById(k.valId).textContent = Math.round(newVal * k.scale) + k.suffix;
+    });
+
+    // Original Mouse Drag Logic
+    canvas.addEventListener('mousedown', e => {
+        dragging = canvas.id;
+        dragStart = e.clientY;
+        valStart = knobs[canvas.id].val;
+        canvas.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+});
+
+let dragging = null, dragStart = null, valStart = null;
+
+document.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const dy = dragStart - e.clientY;
+  const k = knobs[dragging];
+  const newVal = Math.min(1, Math.max(0, valStart + dy/120));
+  k.val = newVal;
+  drawKnob(dragging, newVal, k.color);
+  const disp = Math.round(newVal * k.scale) + k.suffix;
+  $(k.valId).textContent = disp;
+});
+
+document.addEventListener('mouseup', () => {
+  if (dragging) {
+    $(dragging).style.cursor = 'grab';
+    dragging = null;
+  }
+});
+
+// ---- SWITCHES ----
+const switches = [
+  {name:'PRIMARY COOLANT PUMP 1', state:true, type:'on'},
+  {name:'PRIMARY COOLANT PUMP 2', state:true, type:'on'},
+  {name:'CONTAINMENT SPRAY', state:false, type:'off'},
+  {name:'AUXILIARY FEEDWATER', state:true, type:'on'},
+  {name:'SAFETY INJECTION', state:false, type:'off'},
+  {name:'TURBINE BYPASS', state:true, type:'amber'},
+  {name:'PRESSURIZER HEATERS', state:true, type:'on'},
+  {name:'RESIDUAL HEAT REMOVAL', state:false, type:'off'},
+];
+const swList = $('switch-list');
+switches.forEach((sw, i) => {
+  const row = document.createElement('div');
+  row.className = 'switch-row';
+  const cls = sw.state ? (sw.type==='amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
+  row.innerHTML = `<span class="switch-name">${sw.name}</span><div class="${cls}" id="sw-${i}" onclick="toggleSwitch(${i})"></div>`;
+  swList.appendChild(row);
+});
+
+function toggleSwitch(i) {
+  const sw = switches[i];
+  sw.state = !sw.state;
+  const el = $(`sw-${i}`);
+  el.className = sw.state ? (sw.type==='amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
+  addLog(`SYS: ${sw.name} → ${sw.state?'ENABLED':'DISABLED'}`, sw.state?'ok':'warn');
+}
+
+// ---- METERS ----
+const meters = [
+  {name:'RCS FLOW', val:98.2, max:100, unit:'%', color:'#00aaff'},
+  {name:'CORE ΔT', val:44, max:60, unit:'°F', color:'#ff7744'},
+  {name:'PRZR PRESS', val:2235, max:2500, unit:'psia', color:'#00ff88'},
+  {name:'SG LEVEL', val:69, max:100, unit:'%', color:'#00aaff'},
+  {name:'TURBINE PWR', val:88, max:100, unit:'%', color:'#ffaa00'},
+  {name:'BORON PPM', val:642, max:2000, unit:'ppm', color:'#00ffee'},
+];
+
+const meterList = $('meter-list');
+meters.forEach((m, i) => {
+  const pct = (m.val/m.max)*100;
+  const clr = pct > 90 ? '#ff2244' : pct > 75 ? '#ffaa00' : m.color;
+  meterList.innerHTML += `<div class="meter-row">
+    <div class="meter-name">${m.name}</div>
+    <div class="meter-bar-bg"><div class="meter-bar-fill" id="mfill-${i}" style="width:${pct}%;background:${clr}"></div></div>
+    <div class="meter-val" id="mval-${i}">${m.val}<span style="font-size:8px;color:var(--text-dim)"> ${m.unit}</span></div>
+  </div>`;
+});
+
+// ---- READOUTS ----
+const readouts = [
+  {title:'NEUTRON FLUX', val:'3.41E+13', unit:'n/cm²/s'},
+  {title:'CORE OUTLET', val:'589', unit:'°F'},
+  {title:'MODERATOR TEMP', val:'553', unit:'°F'},
+  {title:'FUEL CENTERLINE', val:'1,847', unit:'°F'},
+  {title:'AXIAL OFFSET', val:'+0.3', unit:'%'},
+  {title:'K-EFFECTIVE', val:'1.0000', unit:''},
+];
+const rg = $('readout-grid');
+readouts.forEach(r => {
+  rg.innerHTML += `<div class="readout-box"><div class="readout-title">${r.title}</div><div class="readout-num" style="font-size:13px;">${r.val}</div><div class="readout-unit">${r.unit}</div></div>`;
+});
+
+// ---- ALARMS ----
+const alarms = [
+  {name:'REACTOR PWR', state:'active-g'},
+  {name:'CORE COOLING', state:'active-g'},
+  {name:'HIGH TEMP', state:'normal'},
+  {name:'HIGH PRESS', state:'normal'},
+  {name:'LOW FLOW', state:'normal'},
+  {name:'CONTAINMENT', state:'active-g'},
+  {name:'SCRAM SIGNAL', state:'normal'},
+  {name:'ECCS ACTUATION', state:'normal'},
+];
+const ag = $('alarm-grid');
+alarms.forEach((a, i) => {
+  ag.innerHTML += `<div class="alarm-btn ${a.state}" id="alm-${i}">${a.name}</div>`;
+});
+
+// ---- GAUGES ----
+const gauges = [
+  {label:'QUADRANT NW', val:99.1, color:'#00ff88'},
+  {label:'QUADRANT NE', val:100.3, color:'#00ff88'},
+  {label:'QUADRANT SE', val:98.7, color:'#00ff88'},
+  {label:'QUADRANT SW', val:101.1, color:'#ffaa00'},
+  {label:'AXIAL FLUX', val:50.2, color:'#00aaff'},
+  {label:'PEAK FACTOR', val:1.42, color:'#ffaa00'},
+];
+const gr = $('gauge-row');
+gauges.forEach(g => {
+  gr.innerHTML += `<div class="gauge-wrap"><div style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:${g.color};">${g.val}</div><div class="gauge-label">${g.label}</div></div>`;
+});
+
+// ---- CORE MAP ----
+function drawCoreMap() {
+  const c = $('core-map');
+  const ctx = c.getContext('2d');
+  const W=340, H=200, cx=170, cy=100, maxR=90;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#060a10';
+  ctx.fillRect(0,0,W,H);
+  for (let ring=5; ring>=1; ring--) {
+    const intensity = scramActive ? 0.05 : (0.12 + ring*0.04);
+    ctx.beginPath();
+    ctx.arc(cx, cy, maxR*(ring/5), 0, Math.PI*2);
+    ctx.fillStyle = scramActive ? `rgba(255,50,50,${intensity})` : `rgba(0,255,136,${intensity})`;
+    ctx.fill();
+  }
+  const hexR = 12;
+  const cols = [-60,-40,-20,0,20,40,60];
+  const rows = [-50,-30,-10,10,30,50];
+  const fluxBase = scramActive ? 0.1 : 1.0;
+  rows.forEach((ry, ri) => {
+    const offset = (ri%2===0) ? 0 : 10;
+    cols.forEach((rx, ci) => {
+      const x = cx + rx + offset;
+      const y = cy + ry;
+      const dist = Math.sqrt((x-cx)**2+(y-cy)**2);
+      if (dist > maxR-5) return;
+      const flux = fluxBase * (1 - dist/maxR*0.7 + Math.random()*0.1);
+      const r = scramActive ? Math.floor(255*flux) : Math.floor(50+flux*50);
+      const g2 = scramActive ? Math.floor(50*flux) : Math.floor(200+flux*55);
+      const b = scramActive ? 0 : Math.floor(50*flux);
+      ctx.fillStyle = `rgb(${r},${g2},${b})`;
+      ctx.strokeStyle = '#0a0e14';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let a=0; a<6; a++) {
+        const ang = (a/6)*Math.PI*2 - Math.PI/6;
+        const px = x + Math.cos(ang)*(hexR-1);
+        const py = y + Math.sin(ang)*(hexR-1);
+        a===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    });
+  });
+  ctx.beginPath();
+  ctx.arc(cx, cy, maxR+5, 0, Math.PI*2);
+  ctx.strokeStyle = '#2a3a50';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
+drawCoreMap();
+
+// ---- TREND CHART ----
+const trendData = [];
+for (let i=0; i<60; i++) trendData.push(100 + Math.sin(i*0.3)*2 + Math.random()*1.5);
+
+function drawTrend() {
+  const c = $('trend-chart');
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#060a10';
+  ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#1a2030'; ctx.lineWidth=0.5;
+  for (let y=0; y<=4; y++) {
+    const py = H*(y/4);
+    ctx.beginPath(); ctx.moveTo(0,py); ctx.lineTo(W,py); ctx.stroke();
+  }
+  const minV=Math.min(...trendData)-2, maxV=Math.max(...trendData)+2;
+  ctx.beginPath();
+  trendData.forEach((v,i) => {
+    const x = i*(W/59);
+    const y = H - (v-minV)/(maxV-minV)*H;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle='#00ff88'; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+  ctx.fillStyle='rgba(0,255,136,0.05)'; ctx.fill();
+}
+drawTrend();
+
+// ---- LOG FEED ----
+const logFeed = $('log-feed');
+function addLog(msg, cls='') {
+  const line = document.createElement('div');
+  line.className = `log-line ${cls}`;
+  const now = new Date();
+  const ts = now.toTimeString().slice(0,8);
+  line.textContent = `[${ts}] ${msg}`;
+  logFeed.appendChild(line);
+  logFeed.scrollTop = logFeed.scrollHeight;
+}
+
+// ---- SCRAM ----
+let scramActive = false;
+function triggerScram() {
+  if (scramActive) return;
+  scramActive = true;
+  const btn = $('scram-btn');
+  btn.textContent = '⚠ SCRAM IN PROGRESS — RODS INSERTING';
+  btn.classList.add('scramming');
+  addLog('!!! REACTOR SCRAM INITIATED !!!', 'crit');
+  $('alm-6').className = 'alarm-btn active-r';
+  $('main-status-dot').className = 'status-dot red';
+  $('main-status-text').textContent = 'SCRAM IN PROGRESS';
+  $('main-status-text').style.color = 'var(--red)';
+  knobDefs.slice(0,4).forEach(k => {
+    knobs[k.id].val = 0;
+    drawKnob(k.id, 0, k.color);
+    $(k.valId).textContent = '0%';
+  });
+  drawCoreMap();
+}
+
+// ---- LIVE UPDATES ----
+const startTime = Date.now();
+setInterval(() => {
+  const now = new Date();
+  $('clock').textContent = now.toTimeString().slice(0,8);
+  const elapsed = Math.floor((Date.now()-startTime)/1000);
+  const d = Math.floor(elapsed/86400), h = Math.floor((elapsed%86400)/3600), m = Math.floor((elapsed%3600)/60);
+  $('uptime').textContent = `${d}d ${h}h ${m}m`;
+  if (!scramActive) {
+    const fluxVal = (3.41 + (Math.random()-0.5)*0.05).toFixed(2);
+    document.querySelector('#readout-grid .readout-num').textContent = `${fluxVal}E+13`;
+    const pwr = (3400 + Math.round((Math.random()-0.5)*20));
+    $('therm-pwr').innerHTML = `${pwr.toLocaleString()} <span style="font-size:11px;color:var(--text-dim);">MWth</span>`;
+    $('freq').textContent = (60 + (Math.random()-0.5)*0.02).toFixed(2)+' Hz';
+    trendData.push(100 + Math.sin(Date.now()/3000)*2 + Math.random()*1.5);
+    trendData.shift();
+    drawTrend();
+  }
+}, 1000);
+
+setInterval(drawCoreMap, 2000);
+</script>
