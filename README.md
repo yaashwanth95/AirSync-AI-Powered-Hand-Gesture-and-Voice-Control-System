@@ -78,9 +78,150 @@ This project demonstrates the integration of Artificial Intelligence, Computer V
 ## Project Structure
 
 ```text
+## Project Structure
+
 AirSync-AI-Powered-Hand-Gesture-and-Voice-Control-System/
 │
 ├── airsync.py
+│   ├── Webcam Capture
+│   ├── Hand Tracking Engine
+│   ├── Gesture Recognition Logic
+│   ├── Mouse Automation Module
+│   ├── Voice Recognition Module
+│   ├── Flask Streaming Server
+│   └── Real-Time Video Processing
+│
 ├── nuclear_reactor Control Panel.html
+│   ├── Futuristic Dashboard UI
+│   ├── Live Video Feed Display
+│   ├── Control Panels
+│   ├── System Monitoring Interface
+│   └── Interactive Frontend Components
+│
 ├── requirements.txt
+│   └── Python Dependencies
+│
 ├── README.md
+│   └── Project Documentation
+│
+└── Assets (Optional)
+    ├── Screenshots
+    ├── Demo Videos
+    └── Documentation Images
+
+
+──────────────────────────────────────────────────────────────
+
+HOW IT WORKS
+
+[Step 1] Video Acquisition
+    Webcam continuously captures live video frames using OpenCV.
+
+[Step 2] Hand Detection
+    MediaPipe detects and tracks hand landmarks in real time,
+    generating 21 key points for each detected hand.
+
+[Step 3] Gesture Recognition
+    The system analyzes landmark positions to identify:
+
+    • Cursor Movement
+    • Left Click
+    • Drag & Drop
+    • Scroll Control
+    • Rotary Mode
+
+[Step 4] Desktop Automation
+    Recognized gestures are converted into operating system actions
+    using PyAutoGUI and PyDirectInput.
+
+    Examples:
+    • Move Cursor
+    • Click
+    • Hold & Drag
+    • Scroll Up / Down
+
+[Step 5] Voice Processing
+    SpeechRecognition captures microphone input and converts
+    spoken words into text for active applications.
+
+[Step 6] Live Dashboard Streaming
+    Flask streams processed video frames to the browser where
+    the Reactor Control Dashboard displays the live AI interface.
+
+
+──────────────────────────────────────────────────────────────
+
+TECHNICAL WORKFLOW
+
+Webcam
+   │
+   ▼
+OpenCV
+   │
+   ▼
+MediaPipe Hand Tracking
+   │
+   ▼
+Gesture Recognition
+   │
+   ├── Cursor Control
+   ├── Click Actions
+   ├── Drag & Drop
+   └── Scroll Control
+   │
+   ▼
+PyAutoGUI / PyDirectInput
+   │
+   ▼
+Operating System
+
+
+Microphone
+   │
+   ▼
+Speech Recognition
+   │
+   ▼
+Voice-to-Text
+   │
+   ▼
+Keyboard Automation
+
+
+Flask Server
+   │
+   ▼
+HTML Dashboard
+
+
+──────────────────────────────────────────────────────────────
+
+SKILLS DEMONSTRATED
+
+• Computer Vision
+• Artificial Intelligence
+• Human Computer Interaction (HCI)
+• Real-Time Video Processing
+• Gesture Recognition
+• Speech Recognition
+• Desktop Automation
+• Flask Web Development
+• OpenCV Development
+• MediaPipe Integration
+• Python Programming
+• System Design
+
+
+──────────────────────────────────────────────────────────────
+
+PERFORMANCE HIGHLIGHTS
+
+• Real-Time Hand Tracking
+• Low-Latency Gesture Recognition
+• Smooth Cursor Mapping
+• Multi-Threaded Processing
+• Live Browser-Based Dashboard
+• Touchless Human-Computer Interaction
+• Voice-Controlled Text Input
+• Lightweight and Portable Architecture
+```
