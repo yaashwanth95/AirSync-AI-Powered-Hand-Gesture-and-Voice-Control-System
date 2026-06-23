@@ -1,7 +1,11 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
   :root {
     --green: #00ff88;
@@ -66,18 +70,48 @@
   }
 
   .status-dot {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--green);
     box-shadow: 0 0 8px var(--green);
     animation: pulse 2s infinite;
   }
 
-  .status-dot.amber { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
-  .status-dot.red { background: var(--red); box-shadow: 0 0 8px var(--red); animation: fastpulse 0.5s infinite; }
+  .status-dot.amber {
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+  }
 
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-  @keyframes fastpulse { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+  .status-dot.red {
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red);
+    animation: fastpulse 0.5s infinite;
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  @keyframes fastpulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.2;
+    }
+  }
 
   .main-grid {
     display: grid;
@@ -113,7 +147,8 @@
   }
 
   .knob-canvas {
-    width: 64px; height: 64px;
+    width: 64px;
+    height: 64px;
     cursor: grab;
     display: block;
   }
@@ -171,9 +206,11 @@
   .meter-bar-fill::after {
     content: '';
     position: absolute;
-    right: 0; top: 0; bottom: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     width: 2px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
   }
 
   .meter-val {
@@ -215,7 +252,8 @@
   }
 
   .toggle {
-    width: 36px; height: 18px;
+    width: 36px;
+    height: 18px;
     background: var(--panel3);
     border: 1px solid var(--border);
     border-radius: 9px;
@@ -237,15 +275,26 @@
   .toggle::after {
     content: '';
     position: absolute;
-    width: 12px; height: 12px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: var(--text-dim);
-    top: 2px; left: 2px;
+    top: 2px;
+    left: 2px;
     transition: left 0.2s, background 0.2s;
   }
 
-  .toggle.on::after { left: 20px; background: var(--green); box-shadow: 0 0 6px var(--green); }
-  .toggle.amber-on::after { left: 20px; background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+  .toggle.on::after {
+    left: 20px;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+  }
+
+  .toggle.amber-on::after {
+    left: 20px;
+    background: var(--amber);
+    box-shadow: 0 0 6px var(--amber);
+  }
 
   /* Gauges */
   .gauge-row {
@@ -262,8 +311,17 @@
     gap: 3px;
   }
 
-  .gauge-label { font-size: 8px; color: var(--text-dim); letter-spacing: 1px; text-align: center; }
-  .gauge-val { font-size: 11px; color: var(--cyan); }
+  .gauge-label {
+    font-size: 8px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .gauge-val {
+    font-size: 11px;
+    color: var(--cyan);
+  }
 
   /* Alarm panel */
   .alarm-grid {
@@ -285,10 +343,31 @@
     transition: all 0.2s;
   }
 
-  .alarm-btn.normal { border-color: var(--border); color: var(--text-dim); }
-  .alarm-btn.active-g { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.08); box-shadow: 0 0 6px rgba(0,255,136,0.2); }
-  .alarm-btn.active-a { border-color: var(--amber); color: var(--amber); background: rgba(255,170,0,0.1); animation: pulse 1s infinite; }
-  .alarm-btn.active-r { border-color: var(--red); color: var(--red); background: rgba(255,34,68,0.1); animation: fastpulse 0.4s infinite; }
+  .alarm-btn.normal {
+    border-color: var(--border);
+    color: var(--text-dim);
+  }
+
+  .alarm-btn.active-g {
+    border-color: var(--green);
+    color: var(--green);
+    background: rgba(0, 255, 136, 0.08);
+    box-shadow: 0 0 6px rgba(0, 255, 136, 0.2);
+  }
+
+  .alarm-btn.active-a {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(255, 170, 0, 0.1);
+    animation: pulse 1s infinite;
+  }
+
+  .alarm-btn.active-r {
+    border-color: var(--red);
+    color: var(--red);
+    background: rgba(255, 34, 68, 0.1);
+    animation: fastpulse 0.4s infinite;
+  }
 
   /* Digital readouts */
   .readout-grid {
@@ -304,7 +383,11 @@
     padding: 6px 8px;
   }
 
-  .readout-title { font-size: 8px; color: var(--text-dim); letter-spacing: 1px; }
+  .readout-title {
+    font-size: 8px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
 
   .readout-num {
     font-family: 'Orbitron', sans-serif;
@@ -315,7 +398,10 @@
     line-height: 1;
   }
 
-  .readout-unit { font-size: 8px; color: var(--text-dim); }
+  .readout-unit {
+    font-size: 8px;
+    color: var(--text-dim);
+  }
 
   /* SCRAM button */
   .scram-btn {
@@ -325,7 +411,7 @@
     font-size: 12px;
     font-weight: 900;
     letter-spacing: 4px;
-    background: rgba(255,34,68,0.15);
+    background: rgba(255, 34, 68, 0.15);
     border: 2px solid var(--red);
     color: var(--red);
     cursor: pointer;
@@ -334,10 +420,21 @@
     margin-top: 8px;
   }
 
-  .scram-btn:hover { background: rgba(255,34,68,0.35); box-shadow: 0 0 20px rgba(255,34,68,0.5); }
-  .scram-btn:active { transform: scale(0.97); background: rgba(255,34,68,0.55); }
+  .scram-btn:hover {
+    background: rgba(255, 34, 68, 0.35);
+    box-shadow: 0 0 20px rgba(255, 34, 68, 0.5);
+  }
 
-  .scram-btn.scramming { background: rgba(255,34,68,0.6); box-shadow: 0 0 30px rgba(255,34,68,0.8); animation: fastpulse 0.3s infinite; }
+  .scram-btn:active {
+    transform: scale(0.97);
+    background: rgba(255, 34, 68, 0.55);
+  }
+
+  .scram-btn.scramming {
+    background: rgba(255, 34, 68, 0.6);
+    box-shadow: 0 0 30px rgba(255, 34, 68, 0.8);
+    animation: fastpulse 0.3s infinite;
+  }
 
   /* Log feed */
   .log-feed {
@@ -352,13 +449,29 @@
     margin-top: 8px;
   }
 
-  .log-feed::-webkit-scrollbar { width: 4px; }
-  .log-feed::-webkit-scrollbar-thumb { background: var(--border); }
+  .log-feed::-webkit-scrollbar {
+    width: 4px;
+  }
 
-  .log-line { color: var(--text-dim); }
-  .log-line.warn { color: var(--amber); }
-  .log-line.crit { color: var(--red); }
-  .log-line.ok { color: var(--green); }
+  .log-feed::-webkit-scrollbar-thumb {
+    background: var(--border);
+  }
+
+  .log-line {
+    color: var(--text-dim);
+  }
+
+  .log-line.warn {
+    color: var(--amber);
+  }
+
+  .log-line.crit {
+    color: var(--red);
+  }
+
+  .log-line.ok {
+    color: var(--green);
+  }
 
   /* Bottom row */
   .bottom-grid {
@@ -374,8 +487,131 @@
     letter-spacing: 1px;
   }
 
-  .ticker span { color: var(--cyan); }
+  .ticker span {
+    color: var(--cyan);
+  }
+
+  @keyframes blink {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .blink {
+    animation: blink 1.2s infinite;
+  }
+
+  @keyframes alarm-flash {
+
+    0%,
+    100% {
+      background-color: rgba(5, 7, 10, 0.96);
+    }
+
+    50% {
+      background-color: rgba(35, 6, 10, 0.98);
+    }
+  }
+
+  .lockdown-flash {
+    animation: alarm-flash 1.5s infinite;
+  }
 </style>
+
+<!-- GESTURE SECURITY GATE LOCK SCREEN -->
+<div id="lock-screen"
+  style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 7, 10, 0.95); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); transition: all 0.3s ease;">
+  <div id="lock-screen-box"
+    style="width: 500px; background: var(--panel2); border: 2px solid var(--border); box-shadow: 0 0 30px rgba(0, 255, 136, 0.1); padding: 25px; display: flex; flex-direction: column; gap: 15px; border-top: 5px solid var(--red);">
+    <div
+      style="font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 900; color: var(--red); letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+      <span>SYSTEM ACCESS LOCKED</span>
+      <span style="font-size: 10px; color: var(--text-dim); letter-spacing: 1px;">CHALLENGE MODE</span>
+    </div>
+
+    <div
+      style="display: flex; gap: 15px; background: #000; padding: 10px; border: 1px solid var(--border); justify-content: center; align-items: center;">
+      <!-- Miniature video feed for gesture alignment -->
+      <img id="lockVideoFeed"
+        style="width: 320px; height: 240px; object-fit: contain; border: 1px solid var(--border); background: #05070a;">
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Required
+        Gesture Sequence:</div>
+
+      <!-- Sequence Steps -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+        <div id="step-0"
+          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
+          <span class="step-indicator"
+            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
+          1. Open Palm
+        </div>
+        <div id="step-1"
+          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
+          <span class="step-indicator"
+            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
+          2. Closed Fist
+        </div>
+        <div id="step-2"
+          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
+          <span class="step-indicator"
+            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
+          3. CW Rotation
+        </div>
+        <div id="step-3"
+          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
+          <span class="step-indicator"
+            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
+          4. Pinch Gesture
+        </div>
+      </div>
+    </div>
+
+    <!-- Status & Progress -->
+    <div
+      style="background: var(--panel); border: 1px solid var(--border); padding: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 2px;">
+      <div>
+        <div style="font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">Security
+          Challenge Status</div>
+        <div id="lock-status-text"
+          style="font-size: 12px; font-weight: bold; color: var(--amber); margin-top: 2px; letter-spacing: 0.5px;">
+          AWAITING SECURITY SEQUENCE</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">Time
+          Remaining</div>
+        <div id="lock-timer"
+          style="font-family:'Orbitron',sans-serif; font-size: 18px; font-weight: bold; color: var(--amber); margin-top: 2px;">
+          30.0s</div>
+      </div>
+    </div>
+
+    <!-- Attempts and Controls -->
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
+      <div style="color: var(--text-dim);">ATTEMPTS: <span id="lock-attempts"
+          style="color: var(--red); font-weight: bold;">0 / 3</span></div>
+      <button onclick="resetAuthChallenge()"
+        style="background: var(--panel3); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; font-family: inherit; font-size: 10px; cursor: pointer; text-transform: uppercase; border-radius: 2px; transition: background 0.15s, border-color 0.15s;"
+        onmouseover="this.style.background='var(--panel2)'; this.style.borderColor='var(--amber)';"
+        onmouseout="this.style.background='var(--panel3)'; this.style.borderColor='var(--border)';">Reset
+        Challenge</button>
+    </div>
+
+    <!-- Log display for authentication events -->
+    <div id="auth-log-feed"
+      style="height: 64px; background: #000; border: 1px solid var(--border); padding: 6px 8px; font-size: 9px; color: var(--text-dim); overflow-y: auto; line-height: 1.5; font-family: 'Share Tech Mono', monospace; border-radius: 2px;">
+      [SYSTEM] Secure gate active. Awaiting open palm gesture...
+    </div>
+  </div>
+</div>
 
 <div class="cp-wrapper">
   <div class="cp-header">
@@ -384,15 +620,82 @@
       <div class="cp-subtitle">WESTINGHOUSE AP1000 · REVISION 7.4.1 · AUTHORIZED ACCESS ONLY</div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-      <div class="status-row"><div class="status-dot" id="main-status-dot"></div><span id="main-status-text" style="font-size:10px;color:var(--green);">NOMINAL OPERATION</span></div>
-      <div class="ticker">SYS TIME: <span id="clock">--:--:--</span> &nbsp; UPTIME: <span id="uptime">0d 0h 0m</span></div>
+      <div class="status-row">
+        <div class="status-dot" id="main-status-dot"></div><span id="main-status-text"
+          style="font-size:10px;color:var(--green);">NOMINAL OPERATION</span>
+      </div>
+      <div class="ticker">SYS TIME: <span id="clock">--:--:--</span> &nbsp; UPTIME: <span id="uptime">0d 0h 0m</span>
+      </div>
     </div>
   </div>
 
-  <div class="panel-block" style="margin-bottom: 10px; border-color: var(--cyan);">
-    <div class="panel-label">AI STERILE INTERFACE — LIVE FEED</div>
-    <div style="display: flex; justify-content: center; background: #000;">
-        <img id="videoFeed" src="http://localhost:5000/video_feed" style="width: 100%; max-width: 640px; border: 1px solid var(--cyan);">
+  <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; margin-bottom: 10px;">
+    <!-- LEFT: Live Video Feed -->
+    <div class="panel-block" style="border-color: var(--cyan); display: flex; flex-direction: column;">
+      <div class="panel-label">AI STERILE INTERFACE — LIVE FEED</div>
+      <div
+        style="display: flex; justify-content: center; align-items: center; background: #000; flex: 1; min-height: 240px;">
+        <img id="videoFeed"
+          style="width: 100%; height: auto; max-height: 280px; object-fit: contain; border: 1px solid var(--cyan);">
+      </div>
+    </div>
+
+    <!-- RIGHT: AI Operator Copilot -->
+    <div class="panel-block" style="border-color: var(--green); display: flex; flex-direction: column;">
+      <div class="panel-label">AI OPERATOR COPILOT — CRITICAL SYSTEM MONITOR</div>
+      <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; flex: 1;">
+        <!-- Left Sub-panel: Health Status and Risk Indicator -->
+        <div
+          style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--border); padding-right: 10px; text-align: center;">
+          <div style="font-size: 9px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;">Digital
+            Twin Health</div>
+          <div id="ai-health-val"
+            style="font-family:'Orbitron',sans-serif; font-size: 36px; font-weight: 900; color: var(--green); margin: 6px 0; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);">
+            100%</div>
+
+          <div style="font-size: 8px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 2px;">Risk
+            Rating</div>
+          <div id="ai-risk-badge"
+            style="padding: 3px 8px; font-size: 9px; font-weight: bold; background: rgba(0, 255, 136, 0.1); border: 1px solid var(--green); color: var(--green); border-radius: 2px; letter-spacing: 1px;">
+            LOW RISK</div>
+
+          <div style="font-size: 9px; color: var(--text-dim); margin-top: 12px; text-transform: uppercase;">Failure
+            Probability</div>
+          <div id="ai-fail-prob"
+            style="font-family:'Orbitron',sans-serif; font-size: 15px; color: var(--cyan); margin-top: 2px; font-weight: bold;">
+            0.0%</div>
+        </div>
+
+        <!-- Right Sub-panel: Real-time Analysis & Suggested Corrective Actions -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; font-size: 11px;">
+          <div>
+            <div
+              style="font-size: 9px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px;">
+              Anomaly Detection Status</div>
+            <div id="ai-status-desc"
+              style="color: var(--text); font-weight: bold; margin-bottom: 8px; letter-spacing: 0.5px;">SYSTEM NOMINAL
+            </div>
+
+            <div
+              style="font-size: 9px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px;">
+              Suggested Corrective Action(s)</div>
+            <div id="ai-recommendations"
+              style="color: var(--green); font-size: 10px; line-height: 1.4; background: rgba(0, 0, 0, 0.2); padding: 5px 8px; border: 1px solid var(--border); border-radius: 2px;">
+              • Maintain steady state operation.
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border); padding-top: 6px; margin-top: 6px;">
+            <div
+              style="font-size: 9px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 3px; letter-spacing: 0.5px;">
+              AI Explanation Panel (Why?)</div>
+            <div id="ai-explanation" style="color: var(--text-dim); font-size: 10px; line-height: 1.3;">
+              All critical variables (temperature, pressure, and coolant flow) are stable and match setpoints.
+              Containment pressure and ECCS are nominal.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -455,6 +758,26 @@
       <div class="panel-block">
         <div class="panel-label">System Switches</div>
         <div id="switch-list"></div>
+      </div>
+
+      <div class="panel-block" style="border-color: var(--amber);">
+        <div class="panel-label">Emergency Scenario Generator</div>
+        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+          <button class="scram-btn" id="gen-fail-btn" onclick="generateRandomFailure()"
+            style="margin-top:0; flex:1; font-size:10px; padding:6px; border-color:var(--amber); color:var(--amber); background:rgba(255,170,0,0.1);">Generate
+            Failure</button>
+          <button class="scram-btn" id="reset-fail-btn" onclick="resetScenario()"
+            style="margin-top:0; flex:1; font-size:10px; padding:6px; border-color:var(--green); color:var(--green); background:rgba(0,255,136,0.1);">Reset
+            Scenario</button>
+        </div>
+        <div style="background: var(--panel); border: 1px solid var(--border); padding: 8px; font-size: 10px;">
+          <div style="color: var(--text-dim); text-transform: uppercase; font-size: 8px;">Active Fault Scenario</div>
+          <div id="active-scenario-name" style="font-weight: bold; color: var(--green); margin-top: 2px;">NONE (NOMINAL
+            STATE)</div>
+          <div id="active-scenario-effect"
+            style="color: var(--text-dim); font-size: 9px; margin-top: 4px; line-height: 1.3;">No active anomalies
+            detected. Core is stable.</div>
+        </div>
       </div>
 
     </div>
@@ -561,388 +884,912 @@
   <div class="bottom-grid">
     <div class="panel-block">
       <div class="panel-label">Electrical Output</div>
-      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);margin-top:4px;" id="elec-out">1,157 <span style="font-size:11px;color:var(--text-dim);">MWe</span></div>
-      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">GRID FREQ: <span style="color:var(--green)" id="freq">60.00 Hz</span></div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);margin-top:4px;"
+        id="elec-out">1,157 <span style="font-size:11px;color:var(--text-dim);">MWe</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">GRID FREQ: <span style="color:var(--green)"
+          id="freq">60.00 Hz</span></div>
     </div>
     <div class="panel-block">
       <div class="panel-label">Core Thermal Power</div>
-      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--amber);margin-top:4px;" id="therm-pwr">3,400 <span style="font-size:11px;color:var(--text-dim);">MWth</span></div>
-      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">% RATED: <span style="color:var(--amber)" id="pct-rated">100.0%</span></div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--amber);margin-top:4px;"
+        id="therm-pwr">3,400 <span style="font-size:11px;color:var(--text-dim);">MWth</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">% RATED: <span style="color:var(--amber)"
+          id="pct-rated">100.0%</span></div>
     </div>
     <div class="panel-block">
       <div class="panel-label">Coolant Temperature</div>
-      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--red);margin-top:4px;" id="coolant-temp">589 <span style="font-size:11px;color:var(--text-dim);">°F</span></div>
-      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">Tcold: <span style="color:var(--blue)" id="tcold">545°F</span></div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--red);margin-top:4px;"
+        id="coolant-temp">589 <span style="font-size:11px;color:var(--text-dim);">°F</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">Tcold: <span style="color:var(--blue)"
+          id="tcold">545°F</span></div>
     </div>
     <div class="panel-block">
       <div class="panel-label">Reactor Coolant Pressure</div>
-      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--green);margin-top:4px;" id="rcs-press">2,235 <span style="font-size:11px;color:var(--text-dim);">psia</span></div>
-      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">MARGIN: <span style="color:var(--green)" id="press-margin">+165 psi</span></div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--green);margin-top:4px;"
+        id="rcs-press">2,235 <span style="font-size:11px;color:var(--text-dim);">psia</span></div>
+      <div style="font-size:9px;color:var(--text-dim);margin-top:3px;">MARGIN: <span style="color:var(--green)"
+          id="press-margin">+165 psi</span></div>
     </div>
   </div>
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
+  const $ = id => document.getElementById(id);
 
-// ---- KNOB ENGINE ----
-const knobs = {};
+  // ---- KNOB ENGINE ----
+  const knobs = {};
 
-function drawKnob(id, value, color='#00ffee') {
-  const c = $(id);
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  const W = 64, cx = 32, cy = 32, r = 26;
-  ctx.clearRect(0,0,W,W);
+  function drawKnob(id, value, color = '#00ffee') {
+    const c = $(id);
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const W = 64, cx = 32, cy = 32, r = 26;
+    ctx.clearRect(0, 0, W, W);
 
-  const startA = Math.PI * 0.75;
-  const endA = Math.PI * 2.25;
-  const valA = startA + (endA - startA) * value;
+    const startA = Math.PI * 0.75;
+    const endA = Math.PI * 2.25;
+    const valA = startA + (endA - startA) * value;
 
-  // Outer ring
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, startA, endA);
-  ctx.strokeStyle = '#1a2030';
-  ctx.lineWidth = 5;
-  ctx.lineCap = 'round';
-  ctx.stroke();
-
-  // Value arc
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, startA, valA);
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 5;
-  ctx.lineCap = 'round';
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 8;
-  ctx.stroke();
-  ctx.shadowBlur = 0;
-
-  // Center fill
-  ctx.beginPath();
-  ctx.arc(cx, cy, 18, 0, Math.PI*2);
-  ctx.fillStyle = '#0d1520';
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(cx, cy, 18, 0, Math.PI*2);
-  ctx.strokeStyle = '#2a3a50';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  // Tick marks
-  for (let i=0; i<=10; i++) {
-    const a = startA + (endA-startA)*(i/10);
-    const inner = 19, outer = 23;
+    // Outer ring
     ctx.beginPath();
-    ctx.moveTo(cx + Math.cos(a)*inner, cy + Math.sin(a)*inner);
-    ctx.lineTo(cx + Math.cos(a)*outer, cy + Math.sin(a)*outer);
-    ctx.strokeStyle = i <= Math.round(value*10) ? color : '#2a3a50';
-    ctx.lineWidth = i%5===0 ? 2 : 1;
+    ctx.arc(cx, cy, r, startA, endA);
+    ctx.strokeStyle = '#1a2030';
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
     ctx.stroke();
+
+    // Value arc
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, startA, valA);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Center fill
+    ctx.beginPath();
+    ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+    ctx.fillStyle = '#0d1520';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+    ctx.strokeStyle = '#2a3a50';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Tick marks
+    for (let i = 0; i <= 10; i++) {
+      const a = startA + (endA - startA) * (i / 10);
+      const inner = 19, outer = 23;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(a) * inner, cy + Math.sin(a) * inner);
+      ctx.lineTo(cx + Math.cos(a) * outer, cy + Math.sin(a) * outer);
+      ctx.strokeStyle = i <= Math.round(value * 10) ? color : '#2a3a50';
+      ctx.lineWidth = i % 5 === 0 ? 2 : 1;
+      ctx.stroke();
+    }
+
+    // Indicator dot
+    ctx.beginPath();
+    ctx.arc(cx + Math.cos(valA) * 22, cy + Math.sin(valA) * 22, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
   }
 
-  // Indicator dot
-  ctx.beginPath();
-  ctx.arc(cx + Math.cos(valA)*22, cy + Math.sin(valA)*22, 3, 0, Math.PI*2);
-  ctx.fillStyle = '#fff';
-  ctx.fill();
-}
+  const knobDefs = [
+    { id: 'k-rod1', val: 0.87, color: '#00ff88', valId: 'kv-rod1', suffix: '%', scale: 100 },
+    { id: 'k-rod2', val: 0.92, color: '#00ff88', valId: 'kv-rod2', suffix: '%', scale: 100 },
+    { id: 'k-rod3', val: 0.79, color: '#00ff88', valId: 'kv-rod3', suffix: '%', scale: 100 },
+    { id: 'k-rod4', val: 0.85, color: '#00ff88', valId: 'kv-rod4', suffix: '%', scale: 100 },
+    { id: 'k-flow1', val: 0.73, color: '#00aaff', valId: 'kv-flow1', suffix: '%', scale: 100 },
+    { id: 'k-flow2', val: 0.71, color: '#00aaff', valId: 'kv-flow2', suffix: '%', scale: 100 },
+    { id: 'k-pwr', val: 0.95, color: '#ffaa00', valId: 'kv-pwr', suffix: '%', scale: 100 },
+    { id: 'k-borate', val: 0.12, color: '#00ffee', valId: 'kv-borate', suffix: '%', scale: 100 },
+    { id: 'k-sg1', val: 0.68, color: '#00aaff', valId: 'kv-sg1', suffix: '%', scale: 100 },
+    { id: 'k-sg2', val: 0.71, color: '#00aaff', valId: 'kv-sg2', suffix: '%', scale: 100 },
+    { id: 'k-stm', val: 0.88, color: '#ff7744', valId: 'kv-stm', suffix: '%', scale: 100 },
+    { id: 'k-fw', val: 0.86, color: '#00aaff', valId: 'kv-fw', suffix: '%', scale: 100 },
+    { id: 'k-eccs', val: 0.34, color: '#ff2244', valId: 'kv-eccs', suffix: '%', scale: 100 },
+    { id: 'k-prz', val: 0.58, color: '#ffaa00', valId: 'kv-prz', suffix: '%', scale: 100 },
+    { id: 'k-cont', val: 0.08, color: '#00ff88', valId: 'kv-cont', suffix: '%', scale: 100 },
+    { id: 'k-rcp', val: 1.0, color: '#00ffee', valId: 'kv-rcp', suffix: '%', scale: 100 },
+  ];
 
-const knobDefs = [
-  {id:'k-rod1', val:0.87, color:'#00ff88', valId:'kv-rod1', suffix:'%', scale:100},
-  {id:'k-rod2', val:0.92, color:'#00ff88', valId:'kv-rod2', suffix:'%', scale:100},
-  {id:'k-rod3', val:0.79, color:'#00ff88', valId:'kv-rod3', suffix:'%', scale:100},
-  {id:'k-rod4', val:0.85, color:'#00ff88', valId:'kv-rod4', suffix:'%', scale:100},
-  {id:'k-flow1', val:0.73, color:'#00aaff', valId:'kv-flow1', suffix:'%', scale:100},
-  {id:'k-flow2', val:0.71, color:'#00aaff', valId:'kv-flow2', suffix:'%', scale:100},
-  {id:'k-pwr', val:0.95, color:'#ffaa00', valId:'kv-pwr', suffix:'%', scale:100},
-  {id:'k-borate', val:0.12, color:'#00ffee', valId:'kv-borate', suffix:'%', scale:100},
-  {id:'k-sg1', val:0.68, color:'#00aaff', valId:'kv-sg1', suffix:'%', scale:100},
-  {id:'k-sg2', val:0.71, color:'#00aaff', valId:'kv-sg2', suffix:'%', scale:100},
-  {id:'k-stm', val:0.88, color:'#ff7744', valId:'kv-stm', suffix:'%', scale:100},
-  {id:'k-fw', val:0.86, color:'#00aaff', valId:'kv-fw', suffix:'%', scale:100},
-  {id:'k-eccs', val:0.34, color:'#ff2244', valId:'kv-eccs', suffix:'%', scale:100},
-  {id:'k-prz', val:0.58, color:'#ffaa00', valId:'kv-prz', suffix:'%', scale:100},
-  {id:'k-cont', val:0.08, color:'#00ff88', valId:'kv-cont', suffix:'%', scale:100},
-  {id:'k-rcp', val:1.0, color:'#00ffee', valId:'kv-rcp', suffix:'%', scale:100},
-];
+  knobDefs.forEach(k => {
+    knobs[k.id] = { ...k };
+    drawKnob(k.id, k.val, k.color);
+  });
 
-knobDefs.forEach(k => {
-  knobs[k.id] = {...k};
-  drawKnob(k.id, k.val, k.color);
-});
-
-// Drag to turn knobs (Mouse and Wheel)
-document.querySelectorAll('.knob-canvas').forEach(canvas => {
+  // Drag to turn knobs (Mouse and Wheel)
+  document.querySelectorAll('.knob-canvas').forEach(canvas => {
     // Wheel Listener for AI Hand Rotation Scroll
     canvas.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        const id = canvas.id;
-        const k = knobs[id];
-        const delta = e.deltaY > 0 ? 0.05 : -0.05; 
-        const newVal = Math.min(1, Math.max(0, k.val + delta));
-        k.val = newVal;
-        drawKnob(id, newVal, k.color);
-        document.getElementById(k.valId).textContent = Math.round(newVal * k.scale) + k.suffix;
+      e.preventDefault();
+      const id = canvas.id;
+      const k = knobs[id];
+      const delta = e.deltaY > 0 ? 0.05 : -0.05;
+      const newVal = Math.min(1, Math.max(0, k.val + delta));
+      k.val = newVal;
+      drawKnob(id, newVal, k.color);
+      document.getElementById(k.valId).textContent = Math.round(newVal * k.scale) + k.suffix;
     });
 
     // Original Mouse Drag Logic
     canvas.addEventListener('mousedown', e => {
-        dragging = canvas.id;
-        dragStart = e.clientY;
-        valStart = knobs[canvas.id].val;
-        canvas.style.cursor = 'grabbing';
-        e.preventDefault();
+      dragging = canvas.id;
+      dragStart = e.clientY;
+      valStart = knobs[canvas.id].val;
+      canvas.style.cursor = 'grabbing';
+      e.preventDefault();
     });
-});
+  });
 
-let dragging = null, dragStart = null, valStart = null;
+  let dragging = null, dragStart = null, valStart = null;
 
-document.addEventListener('mousemove', e => {
-  if (!dragging) return;
-  const dy = dragStart - e.clientY;
-  const k = knobs[dragging];
-  const newVal = Math.min(1, Math.max(0, valStart + dy/120));
-  k.val = newVal;
-  drawKnob(dragging, newVal, k.color);
-  const disp = Math.round(newVal * k.scale) + k.suffix;
-  $(k.valId).textContent = disp;
-});
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const dy = dragStart - e.clientY;
+    const k = knobs[dragging];
+    const newVal = Math.min(1, Math.max(0, valStart + dy / 120));
+    k.val = newVal;
+    drawKnob(dragging, newVal, k.color);
+    const disp = Math.round(newVal * k.scale) + k.suffix;
+    $(k.valId).textContent = disp;
+  });
 
-document.addEventListener('mouseup', () => {
-  if (dragging) {
-    $(dragging).style.cursor = 'grab';
-    dragging = null;
+  document.addEventListener('mouseup', () => {
+    if (dragging) {
+      $(dragging).style.cursor = 'grab';
+      dragging = null;
+    }
+  });
+
+  // ---- SWITCHES ----
+  const switches = [
+    { name: 'PRIMARY COOLANT PUMP 1', state: true, type: 'on' },
+    { name: 'PRIMARY COOLANT PUMP 2', state: true, type: 'on' },
+    { name: 'CONTAINMENT SPRAY', state: false, type: 'off' },
+    { name: 'AUXILIARY FEEDWATER', state: true, type: 'on' },
+    { name: 'SAFETY INJECTION', state: false, type: 'off' },
+    { name: 'TURBINE BYPASS', state: true, type: 'amber' },
+    { name: 'PRESSURIZER HEATERS', state: true, type: 'on' },
+    { name: 'RESIDUAL HEAT REMOVAL', state: false, type: 'off' },
+  ];
+  const swList = $('switch-list');
+  switches.forEach((sw, i) => {
+    const row = document.createElement('div');
+    row.className = 'switch-row';
+    const cls = sw.state ? (sw.type === 'amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
+    row.innerHTML = `<span class="switch-name">${sw.name}</span><div class="${cls}" id="sw-${i}" onclick="toggleSwitch(${i})"></div>`;
+    swList.appendChild(row);
+  });
+
+  function toggleSwitch(i) {
+    const sw = switches[i];
+    sw.state = !sw.state;
+    const el = $(`sw-${i}`);
+    el.className = sw.state ? (sw.type === 'amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
+    addLog(`SYS: ${sw.name} → ${sw.state ? 'ENABLED' : 'DISABLED'}`, sw.state ? 'ok' : 'warn');
   }
-});
 
-// ---- SWITCHES ----
-const switches = [
-  {name:'PRIMARY COOLANT PUMP 1', state:true, type:'on'},
-  {name:'PRIMARY COOLANT PUMP 2', state:true, type:'on'},
-  {name:'CONTAINMENT SPRAY', state:false, type:'off'},
-  {name:'AUXILIARY FEEDWATER', state:true, type:'on'},
-  {name:'SAFETY INJECTION', state:false, type:'off'},
-  {name:'TURBINE BYPASS', state:true, type:'amber'},
-  {name:'PRESSURIZER HEATERS', state:true, type:'on'},
-  {name:'RESIDUAL HEAT REMOVAL', state:false, type:'off'},
-];
-const swList = $('switch-list');
-switches.forEach((sw, i) => {
-  const row = document.createElement('div');
-  row.className = 'switch-row';
-  const cls = sw.state ? (sw.type==='amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
-  row.innerHTML = `<span class="switch-name">${sw.name}</span><div class="${cls}" id="sw-${i}" onclick="toggleSwitch(${i})"></div>`;
-  swList.appendChild(row);
-});
+  // ---- METERS ----
+  const meters = [
+    { name: 'RCS FLOW', val: 98.2, max: 100, unit: '%', color: '#00aaff' },
+    { name: 'CORE ΔT', val: 44, max: 60, unit: '°F', color: '#ff7744' },
+    { name: 'PRZR PRESS', val: 2235, max: 2500, unit: 'psia', color: '#00ff88' },
+    { name: 'SG LEVEL', val: 69, max: 100, unit: '%', color: '#00aaff' },
+    { name: 'TURBINE PWR', val: 88, max: 100, unit: '%', color: '#ffaa00' },
+    { name: 'BORON PPM', val: 642, max: 2000, unit: 'ppm', color: '#00ffee' },
+  ];
 
-function toggleSwitch(i) {
-  const sw = switches[i];
-  sw.state = !sw.state;
-  const el = $(`sw-${i}`);
-  el.className = sw.state ? (sw.type==='amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
-  addLog(`SYS: ${sw.name} → ${sw.state?'ENABLED':'DISABLED'}`, sw.state?'ok':'warn');
-}
-
-// ---- METERS ----
-const meters = [
-  {name:'RCS FLOW', val:98.2, max:100, unit:'%', color:'#00aaff'},
-  {name:'CORE ΔT', val:44, max:60, unit:'°F', color:'#ff7744'},
-  {name:'PRZR PRESS', val:2235, max:2500, unit:'psia', color:'#00ff88'},
-  {name:'SG LEVEL', val:69, max:100, unit:'%', color:'#00aaff'},
-  {name:'TURBINE PWR', val:88, max:100, unit:'%', color:'#ffaa00'},
-  {name:'BORON PPM', val:642, max:2000, unit:'ppm', color:'#00ffee'},
-];
-
-const meterList = $('meter-list');
-meters.forEach((m, i) => {
-  const pct = (m.val/m.max)*100;
-  const clr = pct > 90 ? '#ff2244' : pct > 75 ? '#ffaa00' : m.color;
-  meterList.innerHTML += `<div class="meter-row">
+  const meterList = $('meter-list');
+  meters.forEach((m, i) => {
+    const pct = (m.val / m.max) * 100;
+    const clr = pct > 90 ? '#ff2244' : pct > 75 ? '#ffaa00' : m.color;
+    meterList.innerHTML += `<div class="meter-row">
     <div class="meter-name">${m.name}</div>
     <div class="meter-bar-bg"><div class="meter-bar-fill" id="mfill-${i}" style="width:${pct}%;background:${clr}"></div></div>
     <div class="meter-val" id="mval-${i}">${m.val}<span style="font-size:8px;color:var(--text-dim)"> ${m.unit}</span></div>
   </div>`;
-});
+  });
 
-// ---- READOUTS ----
-const readouts = [
-  {title:'NEUTRON FLUX', val:'3.41E+13', unit:'n/cm²/s'},
-  {title:'CORE OUTLET', val:'589', unit:'°F'},
-  {title:'MODERATOR TEMP', val:'553', unit:'°F'},
-  {title:'FUEL CENTERLINE', val:'1,847', unit:'°F'},
-  {title:'AXIAL OFFSET', val:'+0.3', unit:'%'},
-  {title:'K-EFFECTIVE', val:'1.0000', unit:''},
-];
-const rg = $('readout-grid');
-readouts.forEach(r => {
-  rg.innerHTML += `<div class="readout-box"><div class="readout-title">${r.title}</div><div class="readout-num" style="font-size:13px;">${r.val}</div><div class="readout-unit">${r.unit}</div></div>`;
-});
+  // ---- READOUTS ----
+  const readouts = [
+    { title: 'NEUTRON FLUX', val: '3.41E+13', unit: 'n/cm²/s' },
+    { title: 'CORE OUTLET', val: '589', unit: '°F' },
+    { title: 'MODERATOR TEMP', val: '553', unit: '°F' },
+    { title: 'FUEL CENTERLINE', val: '1,847', unit: '°F' },
+    { title: 'AXIAL OFFSET', val: '+0.3', unit: '%' },
+    { title: 'K-EFFECTIVE', val: '1.0000', unit: '' },
+  ];
+  const rg = $('readout-grid');
+  readouts.forEach(r => {
+    rg.innerHTML += `<div class="readout-box"><div class="readout-title">${r.title}</div><div class="readout-num" style="font-size:13px;">${r.val}</div><div class="readout-unit">${r.unit}</div></div>`;
+  });
 
-// ---- ALARMS ----
-const alarms = [
-  {name:'REACTOR PWR', state:'active-g'},
-  {name:'CORE COOLING', state:'active-g'},
-  {name:'HIGH TEMP', state:'normal'},
-  {name:'HIGH PRESS', state:'normal'},
-  {name:'LOW FLOW', state:'normal'},
-  {name:'CONTAINMENT', state:'active-g'},
-  {name:'SCRAM SIGNAL', state:'normal'},
-  {name:'ECCS ACTUATION', state:'normal'},
-];
-const ag = $('alarm-grid');
-alarms.forEach((a, i) => {
-  ag.innerHTML += `<div class="alarm-btn ${a.state}" id="alm-${i}">${a.name}</div>`;
-});
+  // ---- ALARMS ----
+  const alarms = [
+    { name: 'REACTOR PWR', state: 'active-g' },
+    { name: 'CORE COOLING', state: 'active-g' },
+    { name: 'HIGH TEMP', state: 'normal' },
+    { name: 'HIGH PRESS', state: 'normal' },
+    { name: 'LOW FLOW', state: 'normal' },
+    { name: 'CONTAINMENT', state: 'active-g' },
+    { name: 'SCRAM SIGNAL', state: 'normal' },
+    { name: 'ECCS ACTUATION', state: 'normal' },
+  ];
+  const ag = $('alarm-grid');
+  alarms.forEach((a, i) => {
+    ag.innerHTML += `<div class="alarm-btn ${a.state}" id="alm-${i}">${a.name}</div>`;
+  });
 
-// ---- GAUGES ----
-const gauges = [
-  {label:'QUADRANT NW', val:99.1, color:'#00ff88'},
-  {label:'QUADRANT NE', val:100.3, color:'#00ff88'},
-  {label:'QUADRANT SE', val:98.7, color:'#00ff88'},
-  {label:'QUADRANT SW', val:101.1, color:'#ffaa00'},
-  {label:'AXIAL FLUX', val:50.2, color:'#00aaff'},
-  {label:'PEAK FACTOR', val:1.42, color:'#ffaa00'},
-];
-const gr = $('gauge-row');
-gauges.forEach(g => {
-  gr.innerHTML += `<div class="gauge-wrap"><div style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:${g.color};">${g.val}</div><div class="gauge-label">${g.label}</div></div>`;
-});
+  // ---- GAUGES ----
+  const gauges = [
+    { label: 'QUADRANT NW', val: 99.1, color: '#00ff88' },
+    { label: 'QUADRANT NE', val: 100.3, color: '#00ff88' },
+    { label: 'QUADRANT SE', val: 98.7, color: '#00ff88' },
+    { label: 'QUADRANT SW', val: 101.1, color: '#ffaa00' },
+    { label: 'AXIAL FLUX', val: 50.2, color: '#00aaff' },
+    { label: 'PEAK FACTOR', val: 1.42, color: '#ffaa00' },
+  ];
+  const gr = $('gauge-row');
+  gauges.forEach(g => {
+    gr.innerHTML += `<div class="gauge-wrap"><div style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:${g.color};">${g.val}</div><div class="gauge-label">${g.label}</div></div>`;
+  });
 
-// ---- CORE MAP ----
-function drawCoreMap() {
-  const c = $('core-map');
-  const ctx = c.getContext('2d');
-  const W=340, H=200, cx=170, cy=100, maxR=90;
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle = '#060a10';
-  ctx.fillRect(0,0,W,H);
-  for (let ring=5; ring>=1; ring--) {
-    const intensity = scramActive ? 0.05 : (0.12 + ring*0.04);
-    ctx.beginPath();
-    ctx.arc(cx, cy, maxR*(ring/5), 0, Math.PI*2);
-    ctx.fillStyle = scramActive ? `rgba(255,50,50,${intensity})` : `rgba(0,255,136,${intensity})`;
-    ctx.fill();
-  }
-  const hexR = 12;
-  const cols = [-60,-40,-20,0,20,40,60];
-  const rows = [-50,-30,-10,10,30,50];
-  const fluxBase = scramActive ? 0.1 : 1.0;
-  rows.forEach((ry, ri) => {
-    const offset = (ri%2===0) ? 0 : 10;
-    cols.forEach((rx, ci) => {
-      const x = cx + rx + offset;
-      const y = cy + ry;
-      const dist = Math.sqrt((x-cx)**2+(y-cy)**2);
-      if (dist > maxR-5) return;
-      const flux = fluxBase * (1 - dist/maxR*0.7 + Math.random()*0.1);
-      const r = scramActive ? Math.floor(255*flux) : Math.floor(50+flux*50);
-      const g2 = scramActive ? Math.floor(50*flux) : Math.floor(200+flux*55);
-      const b = scramActive ? 0 : Math.floor(50*flux);
-      ctx.fillStyle = `rgb(${r},${g2},${b})`;
-      ctx.strokeStyle = '#0a0e14';
-      ctx.lineWidth = 1;
+  // ---- CORE MAP ----
+  function drawCoreMap() {
+    const c = $('core-map');
+    const ctx = c.getContext('2d');
+    const W = 340, H = 200, cx = 170, cy = 100, maxR = 90;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#060a10';
+    ctx.fillRect(0, 0, W, H);
+    for (let ring = 5; ring >= 1; ring--) {
+      const intensity = scramActive ? 0.05 : (0.12 + ring * 0.04);
       ctx.beginPath();
-      for (let a=0; a<6; a++) {
-        const ang = (a/6)*Math.PI*2 - Math.PI/6;
-        const px = x + Math.cos(ang)*(hexR-1);
-        const py = y + Math.sin(ang)*(hexR-1);
-        a===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
-      }
-      ctx.closePath();
+      ctx.arc(cx, cy, maxR * (ring / 5), 0, Math.PI * 2);
+      ctx.fillStyle = scramActive ? `rgba(255,50,50,${intensity})` : `rgba(0,255,136,${intensity})`;
       ctx.fill();
-      ctx.stroke();
+    }
+    const hexR = 12;
+    const cols = [-60, -40, -20, 0, 20, 40, 60];
+    const rows = [-50, -30, -10, 10, 30, 50];
+    const fluxBase = scramActive ? 0.1 : 1.0;
+    rows.forEach((ry, ri) => {
+      const offset = (ri % 2 === 0) ? 0 : 10;
+      cols.forEach((rx, ci) => {
+        const x = cx + rx + offset;
+        const y = cy + ry;
+        const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+        if (dist > maxR - 5) return;
+        const flux = fluxBase * (1 - dist / maxR * 0.7 + Math.random() * 0.1);
+        const r = scramActive ? Math.floor(255 * flux) : Math.floor(50 + flux * 50);
+        const g2 = scramActive ? Math.floor(50 * flux) : Math.floor(200 + flux * 55);
+        const b = scramActive ? 0 : Math.floor(50 * flux);
+        ctx.fillStyle = `rgb(${r},${g2},${b})`;
+        ctx.strokeStyle = '#0a0e14';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let a = 0; a < 6; a++) {
+          const ang = (a / 6) * Math.PI * 2 - Math.PI / 6;
+          const px = x + Math.cos(ang) * (hexR - 1);
+          const py = y + Math.sin(ang) * (hexR - 1);
+          a === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      });
     });
-  });
-  ctx.beginPath();
-  ctx.arc(cx, cy, maxR+5, 0, Math.PI*2);
-  ctx.strokeStyle = '#2a3a50';
-  ctx.lineWidth = 3;
-  ctx.stroke();
-}
-drawCoreMap();
-
-// ---- TREND CHART ----
-const trendData = [];
-for (let i=0; i<60; i++) trendData.push(100 + Math.sin(i*0.3)*2 + Math.random()*1.5);
-
-function drawTrend() {
-  const c = $('trend-chart');
-  const ctx = c.getContext('2d');
-  const W=c.width, H=c.height;
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#060a10';
-  ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#1a2030'; ctx.lineWidth=0.5;
-  for (let y=0; y<=4; y++) {
-    const py = H*(y/4);
-    ctx.beginPath(); ctx.moveTo(0,py); ctx.lineTo(W,py); ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx, cy, maxR + 5, 0, Math.PI * 2);
+    ctx.strokeStyle = '#2a3a50';
+    ctx.lineWidth = 3;
+    ctx.stroke();
   }
-  const minV=Math.min(...trendData)-2, maxV=Math.max(...trendData)+2;
-  ctx.beginPath();
-  trendData.forEach((v,i) => {
-    const x = i*(W/59);
-    const y = H - (v-minV)/(maxV-minV)*H;
-    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-  });
-  ctx.strokeStyle='#00ff88'; ctx.lineWidth=1.5; ctx.stroke();
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
-  ctx.fillStyle='rgba(0,255,136,0.05)'; ctx.fill();
-}
-drawTrend();
-
-// ---- LOG FEED ----
-const logFeed = $('log-feed');
-function addLog(msg, cls='') {
-  const line = document.createElement('div');
-  line.className = `log-line ${cls}`;
-  const now = new Date();
-  const ts = now.toTimeString().slice(0,8);
-  line.textContent = `[${ts}] ${msg}`;
-  logFeed.appendChild(line);
-  logFeed.scrollTop = logFeed.scrollHeight;
-}
-
-// ---- SCRAM ----
-let scramActive = false;
-function triggerScram() {
-  if (scramActive) return;
-  scramActive = true;
-  const btn = $('scram-btn');
-  btn.textContent = '⚠ SCRAM IN PROGRESS — RODS INSERTING';
-  btn.classList.add('scramming');
-  addLog('!!! REACTOR SCRAM INITIATED !!!', 'crit');
-  $('alm-6').className = 'alarm-btn active-r';
-  $('main-status-dot').className = 'status-dot red';
-  $('main-status-text').textContent = 'SCRAM IN PROGRESS';
-  $('main-status-text').style.color = 'var(--red)';
-  knobDefs.slice(0,4).forEach(k => {
-    knobs[k.id].val = 0;
-    drawKnob(k.id, 0, k.color);
-    $(k.valId).textContent = '0%';
-  });
   drawCoreMap();
-}
 
-// ---- LIVE UPDATES ----
-const startTime = Date.now();
-setInterval(() => {
-  const now = new Date();
-  $('clock').textContent = now.toTimeString().slice(0,8);
-  const elapsed = Math.floor((Date.now()-startTime)/1000);
-  const d = Math.floor(elapsed/86400), h = Math.floor((elapsed%86400)/3600), m = Math.floor((elapsed%3600)/60);
-  $('uptime').textContent = `${d}d ${h}h ${m}m`;
-  if (!scramActive) {
-    const fluxVal = (3.41 + (Math.random()-0.5)*0.05).toFixed(2);
-    document.querySelector('#readout-grid .readout-num').textContent = `${fluxVal}E+13`;
-    const pwr = (3400 + Math.round((Math.random()-0.5)*20));
-    $('therm-pwr').innerHTML = `${pwr.toLocaleString()} <span style="font-size:11px;color:var(--text-dim);">MWth</span>`;
-    $('freq').textContent = (60 + (Math.random()-0.5)*0.02).toFixed(2)+' Hz';
-    trendData.push(100 + Math.sin(Date.now()/3000)*2 + Math.random()*1.5);
+  // ---- TREND CHART ----
+  const trendData = [];
+  for (let i = 0; i < 60; i++) trendData.push(100 + Math.sin(i * 0.3) * 2 + Math.random() * 1.5);
+
+  function drawTrend() {
+    const c = $('trend-chart');
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#060a10';
+    ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = '#1a2030'; ctx.lineWidth = 0.5;
+    for (let y = 0; y <= 4; y++) {
+      const py = H * (y / 4);
+      ctx.beginPath(); ctx.moveTo(0, py); ctx.lineTo(W, py); ctx.stroke();
+    }
+    const minV = Math.min(...trendData) - 2, maxV = Math.max(...trendData) + 2;
+    ctx.beginPath();
+    trendData.forEach((v, i) => {
+      const x = i * (W / 59);
+      const y = H - (v - minV) / (maxV - minV) * H;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.strokeStyle = '#00ff88'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+    ctx.fillStyle = 'rgba(0,255,136,0.05)'; ctx.fill();
+  }
+  drawTrend();
+
+  // ---- LOG FEED ----
+  const logFeed = $('log-feed');
+  function addLog(msg, cls = '') {
+    const line = document.createElement('div');
+    line.className = `log-line ${cls}`;
+    const now = new Date();
+    const ts = now.toTimeString().slice(0, 8);
+    line.textContent = `[${ts}] ${msg}`;
+    logFeed.appendChild(line);
+    logFeed.scrollTop = logFeed.scrollHeight;
+  }
+
+  // ---- SCRAM ----
+  let scramActive = false;
+  function triggerScram() {
+    if (scramActive) return;
+    scramActive = true;
+    const btn = $('scram-btn');
+    btn.textContent = '⚠ SCRAM IN PROGRESS — RODS INSERTING';
+    btn.classList.add('scramming');
+    addLog('!!! REACTOR SCRAM INITIATED !!!', 'crit');
+    $('alm-6').className = 'alarm-btn active-r';
+    $('main-status-dot').className = 'status-dot red';
+    $('main-status-text').textContent = 'SCRAM IN PROGRESS';
+    $('main-status-text').style.color = 'var(--red)';
+
+    // Clear any active failure scenario during emergency trip
+    if (activeScenario) {
+      activeScenario = "";
+      $('active-scenario-name').textContent = "NONE (SCRAM TRIP)";
+      $('active-scenario-name').style.color = 'var(--red)';
+      $('active-scenario-effect').textContent = "Reactor tripped. Emergency scenario terminated.";
+      addLog("SYS: Emergency scenario terminated due to reactor trip.", "warn");
+    }
+
+    knobDefs.slice(0, 4).forEach(k => {
+      knobs[k.id].val = 0;
+      drawKnob(k.id, 0, k.color);
+      $(k.valId).textContent = '0%';
+    });
+    drawCoreMap();
+    fetchCopilotAnalysis();
+  }
+
+  // ---- SECURE GESTURE GATE & AI COPILOT ----
+  let activeScenario = "";
+  let currentTemp = 589;
+  let currentTempCold = 545;
+  let currentPressure = 2235;
+  let currentFlow = 98.2;
+  let currentFlux = 3.41;
+  let currentFreq = 60.00;
+  let currentPower = 3400;
+  let currentMWe = 1157;
+  let currentPRZRLevel = 58;
+  let currentSGLevel = 69;
+
+  const scenarioList = [
+    "Coolant Pump Failure",
+    "Reactor Coolant Leak",
+    "Steam Generator Malfunction",
+    "Pressure Spike",
+    "Sensor Failure",
+    "Core Temperature Runaway",
+    "Valve Failure",
+    "Electrical Grid Instability"
+  ];
+
+  function generateRandomFailure() {
+    if (scramActive) {
+      addLog("SYS: Cannot generate failure. Reactor is currently SCRAMMED.", "warn");
+      return;
+    }
+    const idx = Math.floor(Math.random() * scenarioList.length);
+    activeScenario = scenarioList[idx];
+    $('active-scenario-name').textContent = activeScenario.toUpperCase();
+    $('active-scenario-name').style.color = 'var(--red)';
+    addLog(`EMERGENCY: Scenario '${activeScenario}' has been generated!`, "crit");
+  }
+
+  function resetScenario() {
+    activeScenario = "";
+    $('active-scenario-name').textContent = "NONE (NOMINAL STATE)";
+    $('active-scenario-name').style.color = 'var(--green)';
+    $('active-scenario-effect').textContent = "No active anomalies detected. Core is stable.";
+
+    // Slowly restore nominal parameters
+    currentTemp = 589;
+    currentTempCold = 545;
+    currentPressure = 2235;
+    currentFlow = 98.2;
+    currentFlux = 3.41;
+    currentFreq = 60.00;
+    currentPower = 3400;
+    currentMWe = 1157;
+    currentPRZRLevel = 58;
+    currentSGLevel = 69;
+
+    // Reset knobs
+    knobs['k-flow1'].val = 0.73; drawKnob('k-flow1', 0.73, knobs['k-flow1'].color); $('kv-flow1').textContent = '73%';
+    knobs['k-flow2'].val = 0.71; drawKnob('k-flow2', 0.71, knobs['k-flow2'].color); $('kv-flow2').textContent = '71%';
+    knobs['k-prz'].val = 0.58; drawKnob('k-prz', 0.58, knobs['k-prz'].color); $('kv-prz').textContent = '58%';
+    knobs['k-sg1'].val = 0.68; drawKnob('k-sg1', 0.68, knobs['k-sg1'].color); $('kv-sg1').textContent = '68%';
+    knobs['k-sg2'].val = 0.71; drawKnob('k-sg2', 0.71, knobs['k-sg2'].color); $('kv-sg2').textContent = '71%';
+    knobs['k-fw'].val = 0.86; drawKnob('k-fw', 0.86, knobs['k-fw'].color); $('kv-fw').textContent = '86%';
+    knobs['k-stm'].val = 0.88; drawKnob('k-stm', 0.88, knobs['k-stm'].color); $('kv-stm').textContent = '88%';
+
+    // Reset switches
+    switches.forEach((sw, i) => {
+      if (i === 2 || i === 4 || i === 7) sw.state = false;
+      else sw.state = true;
+      const el = $(`sw-${i}`);
+      if (el) el.className = sw.state ? (sw.type === 'amber' ? 'toggle amber-on' : 'toggle on') : 'toggle';
+    });
+
+    // Reset alarms
+    alarms.forEach((alm, i) => {
+      if (i === 2 || i === 3 || i === 4 || i === 6 || i === 7) alm.state = 'normal';
+      else alm.state = 'active-g';
+      const el = $(`alm-${i}`);
+      if (el) el.className = `alarm-btn ${alm.state}`;
+    });
+
+    if (scramActive) {
+      scramActive = false;
+      const btn = $('scram-btn');
+      btn.textContent = '⚠ REACTOR SCRAM';
+      btn.classList.remove('scramming');
+      $('alm-6').className = 'alarm-btn normal';
+      $('main-status-dot').className = 'status-dot';
+      $('main-status-text').textContent = 'NOMINAL OPERATION';
+      $('main-status-text').style.color = 'var(--green)';
+
+      // Recovery knobs
+      knobs['k-rod1'].val = 0.87; drawKnob('k-rod1', 0.87, knobs['k-rod1'].color); $('kv-rod1').textContent = '87%';
+      knobs['k-rod2'].val = 0.92; drawKnob('k-rod2', 0.92, knobs['k-rod2'].color); $('kv-rod2').textContent = '92%';
+      knobs['k-rod3'].val = 0.79; drawKnob('k-rod3', 0.79, knobs['k-rod3'].color); $('kv-rod3').textContent = '79%';
+      knobs['k-rod4'].val = 0.85; drawKnob('k-rod4', 0.85, knobs['k-rod4'].color); $('kv-rod4').textContent = '85%';
+    }
+
+    addLog("SYS: Emergency scenario reset completed. System restored.", "ok");
+    fetchCopilotAnalysis();
+  }
+
+  function getApiUrl(path) {
+    if (window.location.protocol === 'file:') {
+      return 'http://localhost:5000' + path;
+    }
+    return path;
+  }
+
+  let authPollInterval = null;
+  let currentAuthState = false;
+  let currentVideoFeedMode = "none"; // "main", "lock", "none"
+
+  function startAuthPolling() {
+    if (authPollInterval) clearInterval(authPollInterval);
+    authPollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(getApiUrl('/api/auth_status'));
+        const data = await res.json();
+
+        const lockScreen = $('lock-screen');
+        if (data.authenticated) {
+          if (!currentAuthState) {
+            currentAuthState = true;
+            lockScreen.style.display = 'none';
+            document.querySelector('.cp-wrapper').style.filter = 'none';
+            document.querySelector('.cp-wrapper').style.pointerEvents = 'auto';
+            addLog("ACCESS GRANTED: Operator successfully authenticated.", "ok");
+          }
+          if (currentVideoFeedMode !== "main") {
+            currentVideoFeedMode = "main";
+            $('lockVideoFeed').src = "";
+            $('videoFeed').src = getApiUrl('/video_feed');
+          }
+        } else {
+          currentAuthState = false;
+          lockScreen.style.display = 'flex';
+          document.querySelector('.cp-wrapper').style.filter = 'blur(4px)';
+          document.querySelector('.cp-wrapper').style.pointerEvents = 'none';
+
+          if (currentVideoFeedMode !== "lock") {
+            currentVideoFeedMode = "lock";
+            $('videoFeed').src = "";
+            $('lockVideoFeed').src = getApiUrl('/video_feed');
+          }
+
+          // Highlight active and completed sequence steps
+          for (let i = 0; i < 4; i++) {
+            const stepEl = $(`step-${i}`);
+            const indicatorEl = stepEl.querySelector('.step-indicator');
+            if (i < data.current_step) {
+              stepEl.style.color = 'var(--green)';
+              stepEl.style.borderColor = 'var(--green)';
+              stepEl.style.background = 'rgba(0, 255, 136, 0.05)';
+              indicatorEl.style.background = 'var(--green)';
+              indicatorEl.style.boxShadow = '0 0 8px var(--green)';
+              stepEl.classList.remove('blink');
+            } else if (i === data.current_step) {
+              stepEl.style.color = 'var(--amber)';
+              stepEl.style.borderColor = 'var(--amber)';
+              stepEl.style.background = 'rgba(255, 170, 0, 0.05)';
+              indicatorEl.style.background = 'var(--amber)';
+              indicatorEl.style.boxShadow = '0 0 8px var(--amber)';
+              stepEl.classList.add('blink');
+            } else {
+              stepEl.style.color = 'var(--text-dim)';
+              stepEl.style.borderColor = 'var(--border)';
+              stepEl.style.background = 'var(--panel3)';
+              indicatorEl.style.background = 'var(--border)';
+              indicatorEl.style.boxShadow = 'none';
+              stepEl.classList.remove('blink');
+            }
+          }
+
+          // Update timer view
+          $('lock-timer').textContent = data.time_left.toFixed(1) + 's';
+          $('lock-timer').style.color = data.time_left < 10.0 ? 'var(--red)' : 'var(--amber)';
+
+          // Update failed attempts display
+          $('lock-attempts').textContent = `${data.failed_attempts} / 3`;
+
+          // Sync auth logs
+          const logContainer = $('auth-log-feed');
+          logContainer.innerHTML = data.logs.map(log => {
+            let color = 'var(--text-dim)';
+            if (log.includes('GRANTED') || log.includes('success')) color = 'var(--green)';
+            else if (log.includes('TIMEOUT') || log.includes('warn')) color = 'var(--amber)';
+            else if (log.includes('DENIED') || log.includes('error')) color = 'var(--red)';
+            return `<div style="color: ${color}; margin-bottom: 2px;">${log}</div>`;
+          }).join('');
+          logContainer.scrollTop = logContainer.scrollHeight;
+
+          // Check for lockdown state
+          if (data.hard_locked) {
+            $('lock-status-text').textContent = 'SYSTEM LOCKDOWN - HARD LOCKED';
+            $('lock-status-text').style.color = 'var(--red)';
+            $('lock-screen-box').style.borderColor = 'var(--red)';
+            $('lock-screen-box').style.boxShadow = '0 0 45px rgba(255, 34, 68, 0.4)';
+            lockScreen.classList.add('lockdown-flash');
+            $('lock-timer').textContent = 'LOCKED';
+            $('lock-timer').style.color = 'var(--red)';
+          } else {
+            lockScreen.classList.remove('lockdown-flash');
+            if (data.auth_active) {
+              $('lock-status-text').textContent = `CHALLENGE ACTIVE - STEP ${data.current_step + 1}/4`;
+              $('lock-status-text').style.color = 'var(--amber)';
+              $('lock-screen-box').style.borderColor = 'var(--border)';
+              $('lock-screen-box').style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.1)';
+            } else {
+              $('lock-status-text').textContent = 'CHALLENGE PENDING';
+              $('lock-status-text').style.color = 'var(--text-dim)';
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Secure Authentication poll error:", e);
+      }
+    }, 200);
+  }
+
+  async function resetAuthChallenge() {
+    try {
+      await fetch(getApiUrl('/api/auth_reset'), { method: 'POST' });
+      addLog("AUTH: Security challenge reset sequence initiated.", "info");
+    } catch (e) {
+      console.error("Auth reset failed:", e);
+    }
+  }
+
+  async function fetchCopilotAnalysis() {
+    const payload = {
+      coolantTemp: Math.round(currentTemp),
+      reactorCoolantPressure: Math.round(currentPressure),
+      rcsFlow: parseFloat(currentFlow.toFixed(1)),
+      scramActive: scramActive,
+      activeScenario: activeScenario,
+      alarmCount: alarms.filter(a => a.state.startsWith('active-r') || a.state.startsWith('active-a')).length,
+      rodPositions: [
+        Math.round(knobs['k-rod1'].val * 100),
+        Math.round(knobs['k-rod2'].val * 100),
+        Math.round(knobs['k-rod3'].val * 100),
+        Math.round(knobs['k-rod4'].val * 100)
+      ]
+    };
+
+    try {
+      const res = await fetch(getApiUrl('/api/copilot'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      // Update Copilot HUD elements
+      const healthVal = $('ai-health-val');
+      const riskBadge = $('ai-risk-badge');
+      const failProb = $('ai-fail-prob');
+      const statusDesc = $('ai-status-desc');
+      const recommendations = $('ai-recommendations');
+      const explanation = $('ai-explanation');
+
+      healthVal.textContent = `${data.health}%`;
+      if (data.health >= 90) {
+        healthVal.style.color = 'var(--green)';
+        healthVal.style.textShadow = '0 0 10px rgba(0, 255, 136, 0.4)';
+      } else if (data.health >= 70) {
+        healthVal.style.color = 'var(--amber)';
+        healthVal.style.textShadow = '0 0 10px rgba(255, 170, 0, 0.4)';
+      } else {
+        healthVal.style.color = 'var(--red)';
+        healthVal.style.textShadow = '0 0 10px rgba(255, 34, 68, 0.4)';
+      }
+
+      riskBadge.textContent = `${data.riskLevel} RISK`;
+      if (data.riskLevel === 'LOW') {
+        riskBadge.style.color = 'var(--green)';
+        riskBadge.style.borderColor = 'var(--green)';
+        riskBadge.style.background = 'rgba(0, 255, 136, 0.1)';
+      } else if (data.riskLevel === 'MEDIUM') {
+        riskBadge.style.color = 'var(--amber)';
+        riskBadge.style.borderColor = 'var(--amber)';
+        riskBadge.style.background = 'rgba(255, 170, 0, 0.1)';
+      } else {
+        riskBadge.style.color = 'var(--red)';
+        riskBadge.style.borderColor = 'var(--red)';
+        riskBadge.style.background = 'rgba(255, 34, 68, 0.1)';
+      }
+
+      failProb.textContent = `${data.failProbability}%`;
+      statusDesc.textContent = data.statusDesc;
+      if (data.riskLevel === 'CRITICAL' || data.riskLevel === 'HIGH') {
+        statusDesc.style.color = 'var(--red)';
+      } else if (data.riskLevel === 'MEDIUM') {
+        statusDesc.style.color = 'var(--amber)';
+      } else {
+        statusDesc.style.color = 'var(--text)';
+      }
+
+      recommendations.innerHTML = data.recommendations.map(r => `<div>${r}</div>`).join('');
+      explanation.textContent = data.explanation;
+    } catch (e) {
+      console.error("AI Copilot fetch telemetry update failure:", e);
+    }
+  }
+
+  // ---- LIVE SIMULATION RUNTIME ----
+  const startTime = Date.now();
+  setInterval(() => {
+    const now = new Date();
+    $('clock').textContent = now.toTimeString().slice(0, 8);
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const d = Math.floor(elapsed / 86400), h = Math.floor((elapsed % 86400) / 3600), m = Math.floor((elapsed % 3600) / 60);
+    $('uptime').textContent = `${d}d ${h}h ${m}m`;
+
+    // Physics tick runs here
+    if (!scramActive) {
+      if (activeScenario === "Coolant Pump Failure") {
+        switches[0].state = false;
+        const sw0 = $('sw-0');
+        if (sw0) sw0.className = 'toggle';
+
+        currentFlow = Math.max(42.0, currentFlow - 2.5);
+        currentTemp = Math.min(640, currentTemp + 2.2);
+        currentTempCold = Math.min(580, currentTempCold + 1.8);
+        currentPressure = Math.min(2390, currentPressure + 6);
+        currentPower = Math.round(3400 + (Math.random() - 0.5) * 40);
+
+        alarms[4].state = 'active-r';
+        const alm4 = $('alm-4'); if (alm4) alm4.className = 'alarm-btn active-r';
+        alarms[2].state = 'active-a';
+        const alm2 = $('alm-2'); if (alm2) alm2.className = 'alarm-btn active-a';
+        alarms[1].state = 'active-a';
+        const alm1 = $('alm-1'); if (alm1) alm1.className = 'alarm-btn active-a';
+
+        $('active-scenario-effect').innerHTML = "Flow Rate: <span style='color:var(--red)'>↓ 42%</span><br>Core Temp: <span style='color:var(--red)'>↑ " + Math.round(currentTemp) + "°F</span><br>Pressure Instability: <span style='color:var(--amber)'>↑ " + Math.round(currentPressure) + " psia</span>";
+      }
+      else if (activeScenario === "Reactor Coolant Leak") {
+        knobs['k-prz'].val = Math.max(0.12, knobs['k-prz'].val - 0.03);
+        drawKnob('k-prz', knobs['k-prz'].val, knobs['k-prz'].color);
+        $('kv-prz').textContent = Math.round(knobs['k-prz'].val * 100) + '%';
+
+        currentPressure = Math.max(1620, currentPressure - 18);
+        currentTemp = Math.min(618, currentTemp + 0.8);
+        currentTempCold = Math.min(568, currentTempCold + 0.6);
+        currentFlow = Math.max(88.0, currentFlow - 0.4);
+
+        switches[4].state = true;
+        const sw4 = $('sw-4'); if (sw4) sw4.className = 'toggle on';
+
+        alarms[7].state = 'active-r';
+        const alm7 = $('alm-7'); if (alm7) alm7.className = 'alarm-btn active-r';
+        alarms[1].state = 'active-a';
+        const alm1 = $('alm-1'); if (alm1) alm1.className = 'alarm-btn active-a';
+
+        $('active-scenario-effect').innerHTML = "PRZR Level: <span style='color:var(--red)'>↓ " + Math.round(knobs['k-prz'].val * 100) + "%</span><br>RCS Pressure: <span style='color:var(--red)'>↓ " + Math.round(currentPressure) + " psia</span><br>ECCS Injection: <span style='color:var(--green)'>ACTUATED</span>";
+      }
+      else if (activeScenario === "Steam Generator Malfunction") {
+        knobs['k-sg1'].val = Math.max(0.28, knobs['k-sg1'].val - 0.02);
+        drawKnob('k-sg1', knobs['k-sg1'].val, knobs['k-sg1'].color);
+        $('kv-sg1').textContent = Math.round(knobs['k-sg1'].val * 100) + '%';
+
+        knobs['k-fw'].val = Math.max(0.50, knobs['k-fw'].val - 0.015);
+        drawKnob('k-fw', knobs['k-fw'].val, knobs['k-fw'].color);
+        $('kv-fw').textContent = Math.round(knobs['k-fw'].val * 100) + '%';
+
+        currentTemp = Math.min(608, currentTemp + 0.5);
+        currentPressure = Math.min(2290, currentPressure + 2.5);
+
+        alarms[5].state = 'active-a';
+        const alm5 = $('alm-5'); if (alm5) alm5.className = 'alarm-btn active-a';
+
+        $('active-scenario-effect').innerHTML = "SG1 Level: <span style='color:var(--red)'>↓ " + Math.round(knobs['k-sg1'].val * 100) + "%</span><br>FW Flow: <span style='color:var(--amber)'>↓ " + Math.round(knobs['k-fw'].val * 100) + "%</span><br>Heat Sink: <span style='color:var(--red)'>DEGRADED</span>";
+      }
+      else if (activeScenario === "Pressure Spike") {
+        currentPressure = Math.min(2470, currentPressure + 25);
+        knobs['k-prz'].val = Math.min(0.85, knobs['k-prz'].val + 0.015);
+        drawKnob('k-prz', knobs['k-prz'].val, knobs['k-prz'].color);
+        $('kv-prz').textContent = Math.round(knobs['k-prz'].val * 100) + '%';
+
+        alarms[3].state = 'active-r';
+        const alm3 = $('alm-3'); if (alm3) alm3.className = 'alarm-btn active-r';
+
+        $('active-scenario-effect').innerHTML = "Pressure: <span style='color:var(--red)'>↑ " + Math.round(currentPressure) + " psia</span><br>PRZR Level: <span style='color:var(--amber)'>↑ " + Math.round(knobs['k-prz'].val * 100) + "%</span><br>Overpressure Risk: <span style='color:var(--red)'>HIGH</span>";
+
+        if (currentPressure >= 2450) {
+          addLog("AUTO-SCRAM: High pressurizer pressure limit exceeded (2450 psia)!", "crit");
+          triggerScram();
+        }
+      }
+      else if (activeScenario === "Sensor Failure") {
+        const rndTemp = Math.round(400 + Math.random() * 300);
+        const rndPress = Math.round(1500 + Math.random() * 1000);
+        const rndFlow = Math.round(20 + Math.random() * 80);
+        const rndMWe = Math.round(200 + Math.random() * 1100);
+
+        $('coolant-temp').innerHTML = `${rndTemp} <span style="font-size:11px;color:var(--text-dim);">°F</span>`;
+        $('rcs-press').innerHTML = `${rndPress} <span style="font-size:11px;color:var(--text-dim);">psia</span>`;
+        $('elec-out').innerHTML = `${rndMWe} <span style="font-size:11px;color:var(--text-dim);">MWe</span>`;
+
+        alarms.forEach((a, i) => {
+          if (Math.random() > 0.7) {
+            const states = ['normal', 'active-g', 'active-a', 'active-r'];
+            a.state = states[Math.floor(Math.random() * 4)];
+            const almi = $(`alm-${i}`); if (almi) almi.className = `alarm-btn ${a.state}`;
+          }
+        });
+
+        $('active-scenario-effect').innerHTML = "Excore readings: <span style='color:var(--red)'>FLUCTUATING</span><br>Sensor Integrity: <span style='color:var(--red)'>DEGRADED</span><br>Alarms: <span style='color:var(--amber)'>SPURIOUS</span>";
+      }
+      else if (activeScenario === "Core Temperature Runaway") {
+        currentFlux = Math.min(6.5, currentFlux + 0.18);
+        currentTemp = Math.min(675, currentTemp + 4.5);
+        currentTempCold = Math.min(598, currentTempCold + 2.5);
+        currentPower = Math.min(4300, currentPower + 80);
+        currentMWe = Math.min(1420, currentMWe + 25);
+
+        alarms[0].state = 'active-r';
+        const alm0 = $('alm-0'); if (alm0) alm0.className = 'alarm-btn active-r';
+        alarms[2].state = 'active-r';
+        const alm2 = $('alm-2'); if (alm2) alm2.className = 'alarm-btn active-r';
+        alarms[3].state = 'active-a';
+        const alm3 = $('alm-3'); if (alm3) alm3.className = 'alarm-btn active-a';
+
+        $('active-scenario-effect').innerHTML = "Neutron Flux: <span style='color:var(--red)'>↑ " + currentFlux.toFixed(2) + "E+13</span><br>Thermal Power: <span style='color:var(--red)'>↑ " + currentPower + " MWth</span><br>Outlet Temp: <span style='color:var(--red)'>↑ " + Math.round(currentTemp) + "°F</span>";
+
+        if (currentTemp >= 660) {
+          addLog("AUTO-SCRAM: Core outlet high temperature trip threshold exceeded (660°F)!", "crit");
+          triggerScram();
+        }
+      }
+      else if (activeScenario === "Valve Failure") {
+        switches[5].state = false;
+        const sw5 = $('sw-5'); if (sw5) sw5.className = 'toggle';
+
+        knobs['k-stm'].val = Math.max(0.40, knobs['k-stm'].val - 0.025);
+        drawKnob('k-stm', knobs['k-stm'].val, knobs['k-stm'].color);
+        $('kv-stm').textContent = Math.round(knobs['k-stm'].val * 100) + '%';
+
+        currentPressure = Math.min(2420, currentPressure + 7);
+        currentMWe = Math.max(780, currentMWe - 12);
+
+        alarms[3].state = 'active-a';
+        const alm3 = $('alm-3'); if (alm3) alm3.className = 'alarm-btn active-a';
+
+        $('active-scenario-effect').innerHTML = "Bypass Valve: <span style='color:var(--red)'>CLOSED</span><br>Steam Flow: <span style='color:var(--red)'>↓ " + Math.round(knobs['k-stm'].val * 100) + "%</span><br>MWe Output: <span style='color:var(--amber)'>↓ " + currentMWe + " MWe</span>";
+      }
+      else if (activeScenario === "Electrical Grid Instability") {
+        currentFreq = 60.00 + Math.sin(Date.now() / 600) * 1.95 + (Math.random() - 0.5) * 0.1;
+        currentMWe = Math.round(1157 + Math.sin(Date.now() / 400) * 140 + (Math.random() - 0.5) * 15);
+        currentTemp = Math.min(605, currentTemp + Math.sin(Date.now() / 1500) * 2);
+
+        alarms[0].state = 'active-a';
+        const alm0 = $('alm-0'); if (alm0) alm0.className = 'alarm-btn active-a';
+
+        $('active-scenario-effect').innerHTML = "Grid Frequency: <span style='color:var(--red)'>" + currentFreq.toFixed(2) + " Hz</span><br>Grid Load: <span style='color:var(--amber)'>" + currentMWe + " MWe</span><br>Grid Sync: <span style='color:var(--red)'>UNSTABLE</span>";
+      }
+
+      if (activeScenario === "") {
+        currentTemp = 589 + (Math.random() - 0.5) * 0.8;
+        currentTempCold = 545 + (Math.random() - 0.5) * 0.6;
+        currentPressure = 2235 + (Math.random() - 0.5) * 5;
+        currentFlow = 98.2 + (Math.random() - 0.5) * 0.1;
+        currentFreq = 60.00 + (Math.random() - 0.5) * 0.02;
+        currentPower = 3400 + Math.round((Math.random() - 0.5) * 20);
+        currentMWe = 1157 + Math.round((Math.random() - 0.5) * 5);
+      }
+    } else {
+      // SCRAM active cooling
+      currentFlux = Math.max(0.01, currentFlux * 0.7);
+      currentPower = Math.max(120, currentPower * 0.75);
+      currentMWe = Math.max(0, currentMWe * 0.65);
+      currentTemp = Math.max(540, currentTemp - 4.5);
+      currentTempCold = Math.max(530, currentTempCold - 1.2);
+      currentPressure = Math.max(1850, currentPressure - 8);
+      currentFlow = Math.max(35.0, currentFlow * 0.95);
+    }
+
+    // Render updates
+    if (activeScenario !== "Sensor Failure") {
+      $('coolant-temp').innerHTML = `${Math.round(currentTemp)} <span style="font-size:11px;color:var(--text-dim);">°F</span>`;
+      $('rcs-press').innerHTML = `${Math.round(currentPressure)} <span style="font-size:11px;color:var(--text-dim);">psia</span>`;
+      $('elec-out').innerHTML = `${Math.round(currentMWe).toLocaleString()} <span style="font-size:11px;color:var(--text-dim);">MWe</span>`;
+      $('therm-pwr').innerHTML = `${Math.round(currentPower).toLocaleString()} <span style="font-size:11px;color:var(--text-dim);">MWth</span>`;
+      $('pct-rated').textContent = (currentPower / 3400 * 100).toFixed(1) + '%';
+      $('tcold').textContent = Math.round(currentTempCold) + '°F';
+      $('freq').textContent = currentFreq.toFixed(2) + ' Hz';
+
+      meters[0].val = parseFloat(currentFlow.toFixed(1));
+      meters[1].val = parseFloat((currentTemp - currentTempCold).toFixed(1));
+      meters[2].val = Math.round(currentPressure);
+
+      meters.forEach((m, i) => {
+        const pct = (m.val / m.max) * 100;
+        const clr = pct > 90 ? '#ff2244' : pct > 75 ? '#ffaa00' : m.color;
+        const barFill = $(`mfill-${i}`);
+        const barVal = $(`mval-${i}`);
+        if (barFill && barVal) {
+          barFill.style.width = `${pct}%`;
+          barFill.style.background = clr;
+          barVal.innerHTML = `${m.val}<span style="font-size:8px;color:var(--text-dim)"> ${m.unit}</span>`;
+        }
+      });
+
+      const rg = $('readout-grid');
+      if (rg) {
+        rg.children[0].querySelector('.readout-num').textContent = `${currentFlux.toFixed(2)}E+13`;
+        rg.children[1].querySelector('.readout-num').textContent = `${Math.round(currentTemp)} °F`;
+        rg.children[2].querySelector('.readout-num').textContent = `${Math.round((currentTemp + currentTempCold) / 2)} °F`;
+        rg.children[3].querySelector('.readout-num').textContent = `${Math.round(currentTemp * 3.1)} °F`;
+      }
+    }
+
+    if (currentAuthState) {
+      fetchCopilotAnalysis();
+    }
+
+    // Trend chart draw
+    trendData.push(100 + Math.sin(Date.now() / 3000) * 2 + Math.random() * 1.5);
     trendData.shift();
     drawTrend();
-  }
-}, 1000);
 
-setInterval(drawCoreMap, 2000);
+  }, 1000);
+
+  setInterval(drawCoreMap, 2000);
+
+  // Initialize Authentication Loop on Page Load
+  startAuthPolling();
+  resetAuthChallenge();
 </script>

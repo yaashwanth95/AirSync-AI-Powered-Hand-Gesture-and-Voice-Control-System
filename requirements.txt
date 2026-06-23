@@ -6,3 +6,4 @@ pygame
 mediapipe==0.10.14
 SpeechRecognition
 PyAudio
+pydirectinput
