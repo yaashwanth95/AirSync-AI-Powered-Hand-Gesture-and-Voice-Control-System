@@ -524,95 +524,6 @@
   }
 </style>
 
-<!-- GESTURE SECURITY GATE LOCK SCREEN -->
-<div id="lock-screen"
-  style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 7, 10, 0.95); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); transition: all 0.3s ease;">
-  <div id="lock-screen-box"
-    style="width: 500px; background: var(--panel2); border: 2px solid var(--border); box-shadow: 0 0 30px rgba(0, 255, 136, 0.1); padding: 25px; display: flex; flex-direction: column; gap: 15px; border-top: 5px solid var(--red);">
-    <div
-      style="font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 900; color: var(--red); letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-      <span>SYSTEM ACCESS LOCKED</span>
-      <span style="font-size: 10px; color: var(--text-dim); letter-spacing: 1px;">CHALLENGE MODE</span>
-    </div>
-
-    <div
-      style="display: flex; gap: 15px; background: #000; padding: 10px; border: 1px solid var(--border); justify-content: center; align-items: center;">
-      <!-- Miniature video feed for gesture alignment -->
-      <img id="lockVideoFeed"
-        style="width: 320px; height: 240px; object-fit: contain; border: 1px solid var(--border); background: #05070a;">
-    </div>
-
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <div style="font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Required
-        Gesture Sequence:</div>
-
-      <!-- Sequence Steps -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-        <div id="step-0"
-          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
-          <span class="step-indicator"
-            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
-          1. Open Palm
-        </div>
-        <div id="step-1"
-          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
-          <span class="step-indicator"
-            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
-          2. Closed Fist
-        </div>
-        <div id="step-2"
-          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
-          <span class="step-indicator"
-            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
-          3. CW Rotation
-        </div>
-        <div id="step-3"
-          style="padding: 8px; background: var(--panel3); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; border-radius: 2px; transition: all 0.2s;">
-          <span class="step-indicator"
-            style="width: 8px; height: 8px; border-radius: 50%; background: var(--border); display: inline-block;"></span>
-          4. Pinch Gesture
-        </div>
-      </div>
-    </div>
-
-    <!-- Status & Progress -->
-    <div
-      style="background: var(--panel); border: 1px solid var(--border); padding: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 2px;">
-      <div>
-        <div style="font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">Security
-          Challenge Status</div>
-        <div id="lock-status-text"
-          style="font-size: 12px; font-weight: bold; color: var(--amber); margin-top: 2px; letter-spacing: 0.5px;">
-          AWAITING SECURITY SEQUENCE</div>
-      </div>
-      <div style="text-align: right;">
-        <div style="font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">Time
-          Remaining</div>
-        <div id="lock-timer"
-          style="font-family:'Orbitron',sans-serif; font-size: 18px; font-weight: bold; color: var(--amber); margin-top: 2px;">
-          30.0s</div>
-      </div>
-    </div>
-
-    <!-- Attempts and Controls -->
-    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
-      <div style="color: var(--text-dim);">ATTEMPTS: <span id="lock-attempts"
-          style="color: var(--red); font-weight: bold;">0 / 3</span></div>
-      <button onclick="resetAuthChallenge()"
-        style="background: var(--panel3); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; font-family: inherit; font-size: 10px; cursor: pointer; text-transform: uppercase; border-radius: 2px; transition: background 0.15s, border-color 0.15s;"
-        onmouseover="this.style.background='var(--panel2)'; this.style.borderColor='var(--amber)';"
-        onmouseout="this.style.background='var(--panel3)'; this.style.borderColor='var(--border)';">Reset
-        Challenge</button>
-    </div>
-
-    <!-- Log display for authentication events -->
-    <div id="auth-log-feed"
-      style="height: 64px; background: #000; border: 1px solid var(--border); padding: 6px 8px; font-size: 9px; color: var(--text-dim); overflow-y: auto; line-height: 1.5; font-family: 'Share Tech Mono', monospace; border-radius: 2px;">
-      [SYSTEM] Secure gate active. Awaiting open palm gesture...
-    </div>
-  </div>
-</div>
-
 <div class="cp-wrapper">
   <div class="cp-header">
     <div>
@@ -630,13 +541,80 @@
   </div>
 
   <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; margin-bottom: 10px;">
-    <!-- LEFT: Live Video Feed -->
-    <div class="panel-block" style="border-color: var(--cyan); display: flex; flex-direction: column;">
+    <!-- LEFT: Live Video Feed & Integrated Security Interface -->
+    <div class="panel-block" style="border-color: var(--cyan); display: flex; flex-direction: column; gap: 8px;">
       <div class="panel-label">AI STERILE INTERFACE — LIVE FEED</div>
       <div
-        style="display: flex; justify-content: center; align-items: center; background: #000; flex: 1; min-height: 240px;">
+        style="display: flex; justify-content: center; align-items: center; background: #000; flex: 1; min-height: 220px; position: relative;">
         <img id="videoFeed"
-          style="width: 100%; height: auto; max-height: 280px; object-fit: contain; border: 1px solid var(--cyan);">
+          style="width: 100%; height: auto; max-height: 260px; object-fit: contain; border: 1px solid var(--cyan);">
+      </div>
+
+      <!-- Integrated Camera & Voice Controls -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+        <!-- Camera Controls -->
+        <button id="lock-start-cam-btn" onclick="controlCamera('start')"
+          style="padding: 6px 10px; font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: rgba(0, 170, 255, 0.1); border: 1px solid var(--cyan); color: var(--cyan); cursor: pointer; text-transform: uppercase; transition: all 0.15s;"
+          onmouseover="this.style.background='rgba(0, 170, 255, 0.25)';"
+          onmouseout="this.style.background='rgba(0, 170, 255, 0.1)';">▶ Start Camera</button>
+        <button id="lock-stop-cam-btn" onclick="controlCamera('stop')"
+          style="padding: 6px 10px; font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: rgba(255, 34, 68, 0.1); border: 1px solid var(--red); color: var(--red); cursor: pointer; text-transform: uppercase; transition: all 0.15s;"
+          onmouseover="this.style.background='rgba(255, 34, 68, 0.25)';"
+          onmouseout="this.style.background='rgba(255, 34, 68, 0.1)';">■ Stop Camera</button>
+        <!-- Voice Controls -->
+        <button id="start-voice-btn" onclick="controlVoice('start')"
+          style="padding: 6px 10px; font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: rgba(0, 255, 136, 0.1); border: 1px solid var(--green); color: var(--green); cursor: pointer; text-transform: uppercase; transition: all 0.15s;"
+          onmouseover="this.style.background='rgba(0, 255, 136, 0.25)';"
+          onmouseout="this.style.background='rgba(0, 255, 136, 0.1)';">🎤 Start Voice</button>
+        <button id="stop-voice-btn" onclick="controlVoice('stop')"
+          style="padding: 6px 10px; font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: rgba(255, 34, 68, 0.1); border: 1px solid var(--red); color: var(--red); cursor: pointer; text-transform: uppercase; transition: all 0.15s;"
+          onmouseover="this.style.background='rgba(255, 34, 68, 0.25)';"
+          onmouseout="this.style.background='rgba(255, 34, 68, 0.1)';">⏹ Stop Voice</button>
+      </div>
+
+      <!-- Unified System Status Bar -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px;">
+        <div style="display: flex; align-items: center; gap: 5px; padding: 4px 6px; background: var(--panel3); border: 1px solid var(--border); border-radius: 2px;">
+          <div id="lock-cam-dot" style="width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex-shrink: 0;"></div>
+          <div>
+            <div style="color: var(--text-dim);">CAMERA</div>
+            <div id="lock-cam-status" style="color: var(--red); font-weight: bold;">OFFLINE</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px; padding: 4px 6px; background: var(--panel3); border: 1px solid var(--border); border-radius: 2px;">
+          <div id="voice-status-dot" style="width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex-shrink: 0;"></div>
+          <div>
+            <div style="color: var(--text-dim);">VOICE</div>
+            <div id="voice-status-text" style="color: var(--red); font-weight: bold;">OFF</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px; padding: 4px 6px; background: var(--panel3); border: 1px solid var(--border); border-radius: 2px;">
+          <div id="gesture-status-dot" style="width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex-shrink: 0;"></div>
+          <div>
+            <div style="color: var(--text-dim);">GESTURE</div>
+            <div id="gesture-status-text" style="color: var(--red); font-weight: bold;">INACTIVE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integrated Gesture Security Challenge -->
+      <div id="auth-challenge-container" style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--border); padding-top: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: var(--text-dim); text-transform: uppercase;">
+          <span>Gesture Security Gate:</span>
+          <span id="lock-status-text" style="color: var(--amber); font-weight: bold;">AWAITING SEQUENCE</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px;">
+          <div id="step-0" style="padding: 4px; background: var(--panel3); border: 1px solid var(--border); font-size: 9px; color: var(--text-dim); text-align: center; border-radius: 2px;">1. Open Palm</div>
+          <div id="step-1" style="padding: 4px; background: var(--panel3); border: 1px solid var(--border); font-size: 9px; color: var(--text-dim); text-align: center; border-radius: 2px;">2. Closed Fist</div>
+          <div id="step-2" style="padding: 4px; background: var(--panel3); border: 1px solid var(--border); font-size: 9px; color: var(--text-dim); text-align: center; border-radius: 2px;">3. CW Rotate</div>
+          <div id="step-3" style="padding: 4px; background: var(--panel3); border: 1px solid var(--border); font-size: 9px; color: var(--text-dim); text-align: center; border-radius: 2px;">4. Pinch</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 10px; margin-top: 2px;">
+          <div style="color: var(--text-dim);">ATTEMPTS: <span id="lock-attempts" style="color: var(--red); font-weight: bold;">0 / 3</span></div>
+          <div style="color: var(--text-dim);">TIME: <span id="lock-timer" style="font-family:'Orbitron',sans-serif; color: var(--amber); font-weight: bold;">30.0s</span></div>
+          <button onclick="resetAuthChallenge()" style="background: var(--panel3); border: 1px solid var(--border); color: var(--text); padding: 2px 8px; font-size: 9px; cursor: pointer; text-transform: uppercase; border-radius: 2px;">Reset Challenge</button>
+        </div>
+        <div id="auth-log-feed" style="height: 36px; background: #000; border: 1px solid var(--border); padding: 4px 6px; font-size: 9px; color: var(--text-dim); overflow-y: auto; font-family: 'Share Tech Mono', monospace; border-radius: 2px;">[SYSTEM] Secure gate active. Awaiting open palm gesture...</div>
       </div>
     </div>
 
@@ -702,6 +680,9 @@
   <div class="main-grid">
 
     <div style="display:flex;flex-direction:column;gap:10px;">
+
+
+
 
       <div class="panel-block">
         <div class="panel-label">Control Rod Position</div>
@@ -876,6 +857,11 @@
         <div class="panel-label">Event Log</div>
         <div class="log-feed" id="log-feed"></div>
         <button class="scram-btn" id="scram-btn" onclick="triggerScram()">⚠ REACTOR SCRAM</button>
+      </div>
+
+      <div class="panel-block" style="border-color: var(--green);">
+        <div class="panel-label">Voice Command Log</div>
+        <div class="log-feed" id="voice-log-feed" style="height: 100px;"></div>
       </div>
 
     </div>
@@ -1375,7 +1361,6 @@
 
   let authPollInterval = null;
   let currentAuthState = false;
-  let currentVideoFeedMode = "none"; // "main", "lock", "none"
 
   function startAuthPolling() {
     if (authPollInterval) clearInterval(authPollInterval);
@@ -1384,97 +1369,97 @@
         const res = await fetch(getApiUrl('/api/auth_status'));
         const data = await res.json();
 
-        const lockScreen = $('lock-screen');
+        const videoFeedEl = $('videoFeed');
+        if (videoFeedEl && !videoFeedEl.src.includes('/video_feed')) {
+          videoFeedEl.src = getApiUrl('/video_feed');
+        }
+
         if (data.authenticated) {
           if (!currentAuthState) {
             currentAuthState = true;
-            lockScreen.style.display = 'none';
             document.querySelector('.cp-wrapper').style.filter = 'none';
             document.querySelector('.cp-wrapper').style.pointerEvents = 'auto';
             addLog("ACCESS GRANTED: Operator successfully authenticated.", "ok");
+            const authContainer = $('auth-challenge-container');
+            if (authContainer) authContainer.style.opacity = '0.6';
           }
-          if (currentVideoFeedMode !== "main") {
-            currentVideoFeedMode = "main";
-            $('lockVideoFeed').src = "";
-            $('videoFeed').src = getApiUrl('/video_feed');
+          const statusText = $('lock-status-text');
+          if (statusText) {
+            statusText.textContent = 'ACCESS GRANTED (AUTHENTICATED)';
+            statusText.style.color = 'var(--green)';
           }
         } else {
           currentAuthState = false;
-          lockScreen.style.display = 'flex';
-          document.querySelector('.cp-wrapper').style.filter = 'blur(4px)';
-          document.querySelector('.cp-wrapper').style.pointerEvents = 'none';
-
-          if (currentVideoFeedMode !== "lock") {
-            currentVideoFeedMode = "lock";
-            $('videoFeed').src = "";
-            $('lockVideoFeed').src = getApiUrl('/video_feed');
-          }
+          document.querySelector('.cp-wrapper').style.filter = 'none';
+          document.querySelector('.cp-wrapper').style.pointerEvents = 'auto';
+          const authContainer = $('auth-challenge-container');
+          if (authContainer) authContainer.style.opacity = '1.0';
 
           // Highlight active and completed sequence steps
           for (let i = 0; i < 4; i++) {
             const stepEl = $(`step-${i}`);
-            const indicatorEl = stepEl.querySelector('.step-indicator');
-            if (i < data.current_step) {
-              stepEl.style.color = 'var(--green)';
-              stepEl.style.borderColor = 'var(--green)';
-              stepEl.style.background = 'rgba(0, 255, 136, 0.05)';
-              indicatorEl.style.background = 'var(--green)';
-              indicatorEl.style.boxShadow = '0 0 8px var(--green)';
-              stepEl.classList.remove('blink');
-            } else if (i === data.current_step) {
-              stepEl.style.color = 'var(--amber)';
-              stepEl.style.borderColor = 'var(--amber)';
-              stepEl.style.background = 'rgba(255, 170, 0, 0.05)';
-              indicatorEl.style.background = 'var(--amber)';
-              indicatorEl.style.boxShadow = '0 0 8px var(--amber)';
-              stepEl.classList.add('blink');
-            } else {
-              stepEl.style.color = 'var(--text-dim)';
-              stepEl.style.borderColor = 'var(--border)';
-              stepEl.style.background = 'var(--panel3)';
-              indicatorEl.style.background = 'var(--border)';
-              indicatorEl.style.boxShadow = 'none';
-              stepEl.classList.remove('blink');
+            if (stepEl) {
+              if (i < data.current_step) {
+                stepEl.style.color = 'var(--green)';
+                stepEl.style.borderColor = 'var(--green)';
+                stepEl.style.background = 'rgba(0, 255, 136, 0.15)';
+                stepEl.classList.remove('blink');
+              } else if (i === data.current_step) {
+                stepEl.style.color = 'var(--amber)';
+                stepEl.style.borderColor = 'var(--amber)';
+                stepEl.style.background = 'rgba(255, 170, 0, 0.15)';
+                stepEl.classList.add('blink');
+              } else {
+                stepEl.style.color = 'var(--text-dim)';
+                stepEl.style.borderColor = 'var(--border)';
+                stepEl.style.background = 'var(--panel3)';
+                stepEl.classList.remove('blink');
+              }
             }
           }
 
           // Update timer view
-          $('lock-timer').textContent = data.time_left.toFixed(1) + 's';
-          $('lock-timer').style.color = data.time_left < 10.0 ? 'var(--red)' : 'var(--amber)';
+          const timerEl = $('lock-timer');
+          if (timerEl) {
+            timerEl.textContent = data.time_left.toFixed(1) + 's';
+            timerEl.style.color = data.time_left < 10.0 ? 'var(--red)' : 'var(--amber)';
+          }
 
           // Update failed attempts display
-          $('lock-attempts').textContent = `${data.failed_attempts} / 3`;
+          const attemptsEl = $('lock-attempts');
+          if (attemptsEl) attemptsEl.textContent = `${data.failed_attempts} / 3`;
 
           // Sync auth logs
           const logContainer = $('auth-log-feed');
-          logContainer.innerHTML = data.logs.map(log => {
-            let color = 'var(--text-dim)';
-            if (log.includes('GRANTED') || log.includes('success')) color = 'var(--green)';
-            else if (log.includes('TIMEOUT') || log.includes('warn')) color = 'var(--amber)';
-            else if (log.includes('DENIED') || log.includes('error')) color = 'var(--red)';
-            return `<div style="color: ${color}; margin-bottom: 2px;">${log}</div>`;
-          }).join('');
-          logContainer.scrollTop = logContainer.scrollHeight;
+          if (logContainer) {
+            logContainer.innerHTML = data.logs.map(log => {
+              let color = 'var(--text-dim)';
+              if (log.includes('GRANTED') || log.includes('success')) color = 'var(--green)';
+              else if (log.includes('TIMEOUT') || log.includes('warn')) color = 'var(--amber)';
+              else if (log.includes('DENIED') || log.includes('error')) color = 'var(--red)';
+              return `<div style="color: ${color}; margin-bottom: 2px;">${log}</div>`;
+            }).join('');
+            logContainer.scrollTop = logContainer.scrollHeight;
+          }
 
           // Check for lockdown state
-          if (data.hard_locked) {
-            $('lock-status-text').textContent = 'SYSTEM LOCKDOWN - HARD LOCKED';
-            $('lock-status-text').style.color = 'var(--red)';
-            $('lock-screen-box').style.borderColor = 'var(--red)';
-            $('lock-screen-box').style.boxShadow = '0 0 45px rgba(255, 34, 68, 0.4)';
-            lockScreen.classList.add('lockdown-flash');
-            $('lock-timer').textContent = 'LOCKED';
-            $('lock-timer').style.color = 'var(--red)';
-          } else {
-            lockScreen.classList.remove('lockdown-flash');
-            if (data.auth_active) {
-              $('lock-status-text').textContent = `CHALLENGE ACTIVE - STEP ${data.current_step + 1}/4`;
-              $('lock-status-text').style.color = 'var(--amber)';
-              $('lock-screen-box').style.borderColor = 'var(--border)';
-              $('lock-screen-box').style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.1)';
+          const statusText = $('lock-status-text');
+          if (statusText) {
+            if (data.hard_locked) {
+              statusText.textContent = 'SYSTEM LOCKDOWN - HARD LOCKED';
+              statusText.style.color = 'var(--red)';
+              if (timerEl) {
+                timerEl.textContent = 'LOCKED';
+                timerEl.style.color = 'var(--red)';
+              }
             } else {
-              $('lock-status-text').textContent = 'CHALLENGE PENDING';
-              $('lock-status-text').style.color = 'var(--text-dim)';
+              if (data.auth_active) {
+                statusText.textContent = `STEP ${data.current_step + 1}/4 ACTIVE`;
+                statusText.style.color = 'var(--amber)';
+              } else {
+                statusText.textContent = 'CHALLENGE PENDING';
+                statusText.style.color = 'var(--text-dim)';
+              }
             }
           }
         }
@@ -1789,7 +1774,112 @@
 
   setInterval(drawCoreMap, 2000);
 
+  async function controlCamera(action) {
+    try {
+      const res = await fetch(getApiUrl(`/api/camera/${action}`), { method: 'POST' });
+      const data = await res.json();
+      if (data.status === 'error') {
+        addLog(`CAMERA ERROR: ${data.message}`, 'crit');
+      } else {
+        addLog(`CAMERA: ${data.message}`, 'ok');
+      }
+    } catch (e) {
+      console.error(e);
+      addLog(`CAMERA: Failed to communicate with server`, 'crit');
+    }
+  }
+
+  async function controlVoice(action) {
+    try {
+      const res = await fetch(getApiUrl(`/api/voice/${action}`), { method: 'POST' });
+      const data = await res.json();
+      if (data.status === 'error') {
+        addLog(`VOICE ERROR: ${data.message}`, 'crit');
+      } else {
+        addLog(`VOICE: ${data.message}`, 'ok');
+      }
+    } catch (e) {
+      console.error(e);
+      addLog(`VOICE: Failed to communicate with server`, 'crit');
+    }
+  }
+
+  let systemPollInterval = null;
+  function startSystemStatusPolling() {
+    if (systemPollInterval) clearInterval(systemPollInterval);
+    systemPollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(getApiUrl('/api/system_status'));
+        const data = await res.json();
+        
+        // ── Camera status ──────────────────────────────────────────
+        const lockCamDot    = $('lock-cam-dot');
+        const lockCamStatus = $('lock-cam-status');
+        if (lockCamDot && lockCamStatus) {
+          if (data.camera_active) {
+            lockCamDot.style.background    = 'var(--green)';
+            lockCamDot.style.boxShadow     = '0 0 6px var(--green)';
+            lockCamStatus.textContent      = 'ONLINE';
+            lockCamStatus.style.color      = 'var(--green)';
+          } else {
+            lockCamDot.style.background    = 'var(--red)';
+            lockCamDot.style.boxShadow     = 'none';
+            lockCamStatus.textContent      = data.camera_error ? data.camera_error.toUpperCase() : 'OFFLINE';
+            lockCamStatus.style.color      = 'var(--red)';
+          }
+        }
+
+        // ── Voice status ───────────────────────────────────────────
+        const voiceStatusDot  = $('voice-status-dot');
+        const voiceStatusText = $('voice-status-text');
+        if (voiceStatusDot && voiceStatusText) {
+          if (data.voice_running) {
+            voiceStatusDot.style.background  = 'var(--green)';
+            voiceStatusDot.style.boxShadow   = '0 0 6px var(--green)';
+            voiceStatusText.textContent      = 'LISTENING';
+            voiceStatusText.style.color      = 'var(--green)';
+          } else {
+            voiceStatusDot.style.background  = 'var(--red)';
+            voiceStatusDot.style.boxShadow   = 'none';
+            voiceStatusText.textContent      = data.voice_error ? data.voice_error.toUpperCase() : 'OFF';
+            voiceStatusText.style.color      = 'var(--red)';
+          }
+        }
+
+        // ── Gesture status ─────────────────────────────────────────
+        const gestureStatusDot  = $('gesture-status-dot');
+        const gestureStatusText = $('gesture-status-text');
+        if (gestureStatusDot && gestureStatusText) {
+          if (data.gesture_active) {
+            gestureStatusDot.style.background  = 'var(--green)';
+            gestureStatusDot.style.boxShadow   = '0 0 6px var(--green)';
+            gestureStatusText.textContent      = 'ACTIVE';
+            gestureStatusText.style.color      = 'var(--green)';
+          } else {
+            gestureStatusDot.style.background  = 'var(--red)';
+            gestureStatusDot.style.boxShadow   = 'none';
+            gestureStatusText.textContent      = 'INACTIVE';
+            gestureStatusText.style.color      = 'var(--red)';
+          }
+        }
+        
+        // ── Sync Voice logs ────────────────────────────────────────
+        const voiceLogFeed = $('voice-log-feed');
+        if (voiceLogFeed) {
+          voiceLogFeed.innerHTML = data.voice_logs.map(log => {
+            return `<div class="log-line ok">${log}</div>`;
+          }).join('');
+          voiceLogFeed.scrollTop = voiceLogFeed.scrollHeight;
+        }
+      } catch (e) {
+
+        console.error("System status poll error:", e);
+      }
+    }, 500);
+  }
+
   // Initialize Authentication Loop on Page Load
   startAuthPolling();
   resetAuthChallenge();
+  startSystemStatusPolling();
 </script>
